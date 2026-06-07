@@ -39,6 +39,7 @@ jobs:
             echo "No newsletter changes to commit."
           else
             git commit -m "Publish daily AI Builders newsletter"
+            git pull --rebase origin main
             git push
           fi
 
