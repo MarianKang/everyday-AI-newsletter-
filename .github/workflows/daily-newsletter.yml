@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: "30 5 * * *"
   workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/daily-newsletter.yml"
+      - "scripts/cloud-daily-newsletter.mjs"
 
 permissions:
   contents: write
