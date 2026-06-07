@@ -239,7 +239,7 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems }) {
   podcastItems.forEach((item, index) => sourceMap.set(item, `podcast-${index + 1}`));
   blogItems.forEach((item, index) => sourceMap.set(item, `blog-${index + 1}`));
   const groups = classify(allItems);
-  const title = `AI Builders 中文日报｜${md(date)}`;
+  const title = `Everyday AI Newsletter｜${ymd(date)}`;
   const lede = allItems.length
     ? `这期覆盖 ${formatDateTime(window.start)} 到 ${formatDateTime(window.end)}。窗口内共有 ${xItems.length} 条 X 更新、${podcastItems.length} 条播客更新、${blogItems.length} 条博客更新。下面先按主题看变化，再按信息源展开明细。`
     : `这期覆盖 ${formatDateTime(window.start)} 到 ${formatDateTime(window.end)}。当前 feed 在这个窗口内没有抓到新更新，下面保留结构，方便你确认日报流程。`;
@@ -383,14 +383,14 @@ async function main() {
 
   const { xItems, podcastItems, blogItems } = collectItems(feedX, feedPodcasts, feedBlogs, window);
   const html = renderHtml({ date, window, xItems, podcastItems, blogItems });
-  const index = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url=${fileName}"><title>AI Builders 中文日报</title></head><body><p><a href="${fileName}">打开最新日报</a></p></body></html>`;
+  const index = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url=${fileName}"><title>Everyday AI Newsletter</title></head><body><p><a href="${fileName}">打开最新一期</a></p></body></html>`;
 
   await fs.mkdir(PUBLIC_DIR, { recursive: true });
   await fs.writeFile(path.join(PUBLIC_DIR, fileName), html);
   await fs.writeFile(path.join(PUBLIC_DIR, "index.html"), index);
 
   if (process.env.SEND_EMAIL !== "false") {
-    await sendEmail({ title: `AI Builders 中文日报｜${md(date)}`, url: publicUrl });
+    await sendEmail({ title: `Everyday AI Newsletter｜${ymd(date)}`, url: publicUrl });
   }
 
   console.log(publicUrl);
