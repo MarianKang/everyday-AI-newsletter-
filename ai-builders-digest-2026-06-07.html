@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Builders 中文日报｜6月7日</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f4;
+      --paper: #ffffff;
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d9ded6;
+      --accent: #1769aa;
+      --soft: #eef4f7;
+      --note: #f7f1df;
+      --green: #2f6f4e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    main {
+      width: min(900px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 30px 0 48px;
+    }
+
+    header {
+      padding: 10px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 8px 0 12px;
+      font-size: clamp(30px, 6vw, 48px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 34px 0 12px;
+      font-size: 23px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    p { margin: 0 0 13px; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+
+    .meta {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .lede {
+      max-width: 760px;
+      font-size: 18px;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid #e5d7aa;
+      border-radius: 8px;
+      background: var(--note);
+      color: #5b4b1f;
+    }
+
+    .toc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .toc a {
+      display: inline-block;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .toc a:hover {
+      border-color: #9ab7c9;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .metric,
+    .block,
+    .source {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .metric {
+      display: block;
+      padding: 13px 14px;
+      color: var(--ink);
+      text-decoration: none;
+      transition: border-color 120ms ease, transform 120ms ease;
+    }
+
+    .metric:hover {
+      border-color: #9ab7c9;
+      transform: translateY(-1px);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 25px;
+      line-height: 1.1;
+    }
+
+    .block {
+      padding: 18px;
+      margin-top: 12px;
+    }
+
+    .source {
+      padding: 18px;
+      margin-top: 14px;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 9px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .item {
+      padding-top: 13px;
+      margin-top: 13px;
+      border-top: 1px solid var(--line);
+    }
+
+    .item:first-of-type {
+      padding-top: 0;
+      margin-top: 0;
+      border-top: 0;
+    }
+
+    .quote {
+      padding: 12px 14px;
+      margin: 10px 0 12px;
+      border-left: 4px solid #9ab7c9;
+      background: var(--soft);
+      color: #273746;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+
+    li { margin: 8px 0; }
+
+    footer {
+      margin-top: 34px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 680px) {
+      main { width: min(100% - 24px, 900px); padding-top: 22px; }
+      .grid { grid-template-columns: 1fr; }
+      .block, .source { padding: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="meta">发送窗口：2026年6月6日 13:30 至 2026年6月7日 13:30，Asia/Shanghai</p>
+      <h1>AI Builders 中文日报｜6月7日</h1>
+      <p class="lede">今天这个时间窗里的 feed 不算热闹，但有几条线索值得放在一起看：agent 的“上下文和记忆层”继续往产品里走，builder 教育和工作流产品还在加速，而创业圈对 founder/VC 关系的讨论也顺手冒了出来。</p>
+      <div class="note">
+        说明：这版已经按你刚定的新规则重写。它不是“精选 5 条链接”，也不按点赞过滤；这里只按 13:30 的时间窗口，把窗口内可见更新做成 newsletter 概览。当前中央 feed 最新生成时间是 2026年6月6日 15:23 CST，所以今天预览里的内容会比第一版少。
+      </div>
+      <nav class="toc" aria-label="日报目录">
+        <a href="#what-happened">今天发生了什么</a>
+        <a href="#source-overview">信息源更新概览</a>
+        <a href="#product-signals">产品与观点线索</a>
+        <a href="#watch-questions">可继续观察的问题</a>
+      </nav>
+      <div class="grid">
+        <a class="metric" href="#x-updates" aria-label="跳转到窗口内 X 更新">
+          <strong>4</strong><span class="meta">X 更新的信息</span>
+        </a>
+        <a class="metric" href="#podcasts" aria-label="跳转到窗口内播客">
+          <strong>0</strong><span class="meta">播客</span>
+        </a>
+        <a class="metric" href="#blogs" aria-label="跳转到窗口内博客">
+          <strong>0</strong><span class="meta">博客</span>
+        </a>
+      </div>
+    </header>
+
+    <section id="what-happened">
+      <h2>今天发生了什么</h2>
+      <div class="block">
+        <span class="label">Agent / 上下文层</span>
+        <h3>agent 产品的重心继续从“能回答”往“带上下文做事”移动</h3>
+        <p>今天最像主线的是 Garry Tan 提到 GBrain、OpenClaw 和 Hermes Agent 的组合。单看原文很短，但它背后指向的是 agent 产品正在补的那块能力：长期上下文、记忆、执行环境，以及不同 agent 工具之间怎么组合。</p>
+        <p>为什么可能重要：如果 agent 要成为日常工作流的一部分，它不能每次都像第一次见你。它需要知道历史、目标、偏好、项目状态，还要能接上工具链。也就是说，产品竞争不只在模型本身，还在“上下文层”和“可持续执行层”。</p>
+        <p class="meta">信息来源：<a href="#garrytan-x">Garry Tan 的 X 更新</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">Builder Education</span>
+        <h3>“教人更好地构建软件”可能会成为一类新的 AI 产品入口</h3>
+        <p>Garry 另一条更新提到一个帮助人学习更好技术、构建更好软件的项目。这条不像传统产品发布，更像是在指向一个新的教育/工具混合形态：不是只给教程，而是让人边构建、边反馈、边形成更好的工程和产品习惯。</p>
+        <p>为什么可能重要：AI 让写代码更容易之后，真正稀缺的东西会变成判断力、拆问题能力、工程质量感和持续交付能力。如果有产品能把这些能力训练出来，它可能比单纯的代码生成工具更贴近长期需求。</p>
+        <p class="meta">信息来源：<a href="#garrytan-x">Garry Tan 的 X 更新</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">Startup / 生态关系</span>
+        <h3>AI 创业热度越高，founder 和资本之间的预期管理越重要</h3>
+        <p>Nikunj Kothari 的更新更偏创业生态，而不是具体 AI 产品。他接的是 founder/VC 关系讨论，核心提醒是：没有 founder，就没有 VC。放在 AI 创业语境里，这类讨论不是主菜，但会影响创始人怎样看待资本、速度、估值和长期建设。</p>
+        <p>为什么可能重要：AI 创业现在很容易被速度和叙事推着走，但产品公司最终还是要回到用户、交付、留存和组织能力。founder 与投资人的预期如果不对齐，产品节奏就容易被融资叙事牵着走。</p>
+        <p class="meta">信息来源：<a href="#nikunj-x">Nikunj Kothari 的 X 更新</a></p>
+      </div>
+    </section>
+
+    <section id="source-overview">
+      <h2>信息源更新概览</h2>
+
+      <div class="source" id="x-updates">
+        <span class="label">X / Twitter Builder</span>
+        <h3 id="garrytan-x">Garry Tan</h3>
+        <div class="item">
+          <p class="meta">2026-06-06 15:13 CST</p>
+          <div class="quote">GBrain gives OpenClaw and Hermes Agent wings</div>
+          <p>这条偏 agent 产品生态。可以理解为 Garry 在给 GBrain、OpenClaw、Hermes Agent 这组工具关系做背书：agent 的能力不只在模型，还在能否带着上下文飞起来。</p>
+          <p><a href="https://x.com/garrytan/status/2063157328753594505" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+        <div class="item">
+          <p class="meta">2026-06-06 14:30 CST</p>
+          <div class="quote">You can now finally try one of those big projects I was teasing that I started working on a few months ago. We want this to over time get better at helping you learn the best techniques to build better software, faster.</div>
+          <p>这条更像产品/项目预告，重点是“帮助人学会更好更快地构建软件”。它和 AI builder 教育、开发工作流、软件生产力提升有关。</p>
+          <p><a href="https://x.com/garrytan/status/2063146456106795457" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+        <div class="item">
+          <p class="meta">2026-06-06 14:28 CST</p>
+          <div class="quote">This is the definition of must-have for the future drone war.</div>
+          <p>这条偏军事/无人机方向，不是典型 AI 产品更新。保留它是因为你要求不按主观重要性过滤；但在今天这份日报里，我会把它标为偏题信息，不展开解读。</p>
+          <p><a href="https://x.com/garrytan/status/2063146111960019028" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+      </div>
+
+      <div class="source">
+        <span class="label">X / Twitter Builder</span>
+        <h3 id="nikunj-x">Nikunj Kothari</h3>
+        <div class="item">
+          <p class="meta">2026-06-06 14:17 CST</p>
+          <div class="quote">Full video out tomorrow am</div>
+          <p>这条只是视频预告，本身信息量不高。暂时只能记为后续观察点：明天如果视频进入 feed，再看它是否和创业、AI 产品或 builder 方法有关。</p>
+          <p><a href="https://x.com/nikunj/status/2063143108070744492" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+        <div class="item">
+          <p class="meta">窗口外但接近：2026-06-05 22:54 CST</p>
+          <div class="quote">QED. The quote tweets in this thread just show we HAVE to do better. Evergreen reminder that without founders, there are no VCs!</div>
+          <p>这条严格来说早于 13:30 窗口很多小时，不应该算入今天发送窗口。我放在这里是为了说明第一版为什么看起来内容更多：当时没有按你现在定下的窗口裁剪，所以混入了更多旧更新。正式自动日报会按 13:30 窗口处理。</p>
+          <p><a href="https://x.com/nikunj/status/2062910976018854252" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+      </div>
+
+      <div class="source" id="podcasts">
+        <span class="label">Podcasts</span>
+        <h3>本窗口暂无新播客</h3>
+        <p>第一版里的 Figma / SaaS apocalypse 那期播客发布时间是 2026-06-03，不在你现在定义的日报窗口内。以后如果窗口内有播客，我会保留 episode 标题、来源、链接，并做深读摘要。</p>
+      </div>
+
+      <div class="source" id="blogs">
+        <span class="label">Blogs</span>
+        <h3>本窗口暂无新博客</h3>
+        <p>当前 feed 在这个时间窗内没有博客更新。正式日报会在这里列出 OpenAI、Anthropic 等来源的新文章，如果 feed 抓到了的话。</p>
+      </div>
+    </section>
+
+    <section id="product-signals">
+      <h2>产品与观点线索</h2>
+      <div class="block">
+        <ul>
+          <li><strong>Agent 产品会继续补上下文层。</strong> GBrain / OpenClaw / Hermes Agent 这种组合说明，大家不再只问“模型能不能做”，而是问“agent 能不能带着记忆、状态和工具链持续做”。</li>
+          <li><strong>Builder tooling 可能会从“帮你生成代码”扩展到“帮你学会构建”。</strong> Garry 提到的学习更好技术、构建更好软件，像是在把教育、工作流和 AI 辅助开发连起来。</li>
+          <li><strong>创业生态的叙事还在摇摆。</strong> founder/VC 关系讨论虽然不是产品发布，但对 AI startup 的节奏有影响，因为资本和创始人的预期会塑造产品决策。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="watch-questions">
+      <h2>可继续观察的问题</h2>
+      <div class="block">
+        <ul>
+          <li>GBrain 这类产品到底会成为独立产品，还是成为 agent 平台的基础能力？</li>
+          <li>“学习更好地构建软件”的工具，会更像课程、IDE 插件、agent，还是一个完整的训练系统？</li>
+          <li>当 AI 创业速度越来越快，创始人和投资人之间的期待会不会更需要产品化的透明机制？</li>
+          <li>正式日报如果遇到偏题但窗口内的内容，是只轻标注，还是单独放进“低信号/偏题”小节？</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p>Generated through the Follow Builders skill: https://github.com/zarazhangrui/follow-builders</p>
+      <p>邮件自动发送仍需在 ~/.follow-builders/.env 中配置 RESEND_API_KEY。</p>
+    </footer>
+  </main>
+</body>
+</html>
