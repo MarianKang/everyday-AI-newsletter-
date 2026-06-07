@@ -6,7 +6,7 @@ const REPO = "everyday-AI-newsletter-";
 const BASE_URL = `https://${OWNER.toLowerCase()}.github.io/${REPO}/`;
 const SOURCE_REPO = "zarazhangrui/follow-builders";
 const SOURCE_BRANCH = "main";
-const SOURCE_API = `https://api.github.com/repos/${SOURCE_REPO}/contents`;
+const SOURCE_RAW = `https://raw.githubusercontent.com/${SOURCE_REPO}/${SOURCE_BRANCH}`;
 const PUBLIC_DIR = ".";
 const TIME_ZONE = "Asia/Shanghai";
 const RECIPIENT = "kt951218@163.com";
@@ -147,20 +147,16 @@ function inWindow(value, window) {
 }
 
 async function fetchGithubText(filePath) {
-  const url = `${SOURCE_API}/${filePath}?ref=${SOURCE_BRANCH}`;
+  const url = `${SOURCE_RAW}/${filePath}`;
   const response = await fetch(url, {
-    headers: {
-      Accept: "application/vnd.github+json",
-      "User-Agent": "ai-builders-newsletter-cloud",
-    },
+    headers: { "User-Agent": "ai-builders-newsletter-cloud" },
   });
 
   if (!response.ok) {
     throw new Error(`Failed to fetch ${filePath}: ${response.status} ${response.statusText}`);
   }
 
-  const payload = await response.json();
-  return Buffer.from(payload.content, "base64").toString("utf8");
+  return response.text();
 }
 
 async function fetchSourceJson(filePath) {
