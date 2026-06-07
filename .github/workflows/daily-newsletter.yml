@@ -27,6 +27,7 @@ jobs:
       - name: Generate newsletter
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SEND_EMAIL: "false"
         run: node scripts/cloud-daily-newsletter.mjs
 
@@ -46,4 +47,5 @@ jobs:
       - name: Send public link by email
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: node scripts/cloud-daily-newsletter.mjs
