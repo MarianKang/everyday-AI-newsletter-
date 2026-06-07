@@ -1,5 +1,7 @@
 name: Daily AI Builders Newsletter
 
+# Triggered once after adding DEEPSEEK_API_KEY to verify model-generated summaries.
+
 on:
   schedule:
     - cron: "30 5 * * *"
