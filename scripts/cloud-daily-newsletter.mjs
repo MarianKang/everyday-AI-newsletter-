@@ -10,6 +10,7 @@ const SOURCE_RAW = `https://raw.githubusercontent.com/${SOURCE_REPO}/${SOURCE_BR
 const PUBLIC_DIR = ".";
 const TIME_ZONE = "Asia/Shanghai";
 const RECIPIENT = "kt951218@163.com";
+const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL || "deepseek-chat";
 
 const TOPICS = [
   {
@@ -140,6 +141,92 @@ function chineseSummary(item) {
   return `${item.sourceName} 有一条窗口内更新，原文信息较短，先作为补充动态保留。`;
 }
 
+function compactItem(item, index) {
+  return {
+    id: sourceAnchor(item, index),
+    type: item.type,
+    sourceName: item.sourceName,
+    title: item.title,
+    date: formatDateTime(item.date),
+    url: item.url,
+    text: truncate(item.text, item.type === "podcast" ? 1800 : 900),
+  };
+}
+
+function extractJson(text) {
+  const trimmed = String(text || "").trim();
+  try {
+    return JSON.parse(trimmed);
+  } catch {
+    const start = trimmed.indexOf("{");
+    const end = trimmed.lastIndexOf("}");
+    if (start === -1 || end === -1 || end <= start) throw new Error("DeepSeek response was not JSON.");
+    return JSON.parse(trimmed.slice(start, end + 1));
+  }
+}
+
+function validateModelDigest(value) {
+  if (!value || typeof value !== "object") throw new Error("DeepSeek digest JSON is not an object.");
+  if (typeof value.lede !== "string") throw new Error("DeepSeek digest JSON missing lede.");
+  if (!Array.isArray(value.themes)) throw new Error("DeepSeek digest JSON missing themes.");
+  if (!Array.isArray(value.itemSummaries)) throw new Error("DeepSeek digest JSON missing itemSummaries.");
+  if (!Array.isArray(value.productSignals)) value.productSignals = [];
+  if (!Array.isArray(value.watchQuestions)) value.watchQuestions = [];
+  return value;
+}
+
+async function generateModelDigest({ window, xItems, podcastItems, blogItems }) {
+  const apiKey = process.env.DEEPSEEK_API_KEY;
+  if (!apiKey) return null;
+
+  const sourceItems = [...xItems, ...podcastItems, ...blogItems];
+  const compactItems = sourceItems.map(compactItem);
+  const prompt = {
+    window: `${formatDateTime(window.start)} 至 ${formatDateTime(window.end)} Asia/Shanghai`,
+    requirements: [
+      "输出必须是简体中文，除 AI、LLM、agent、prompt、token、API、evals 等常用技术词外，不要保留英文原文。",
+      "标题不需要生成，标题固定由系统使用 Everyday AI Newsletter｜YYYY-MM-DD。",
+      "lede 是标题下方的本期整体概览，不要只是统计数量，要概括本期整体形状。",
+      "themes 是“今天发生了什么”，必须跨 X、播客、博客综合共同主题、变化方向、产品/agent/创业相关类别，不要按信息源类型分类。",
+      "每个 theme 必须包含 label、title、summary、why、sourceIds。sourceIds 使用输入 item 的 id。",
+      "itemSummaries 必须覆盖每一个输入 item，给出中文 summary，不能省略。",
+      "productSignals 是产品与观点线索，watchQuestions 是可继续观察的问题。",
+      "不要写“值得点击的链接”或强诱导点击；链接由系统在页面下方保留。",
+      "不要编造输入里没有的信息。可以解释为什么重要，但要明确是从来源内容推断。",
+    ],
+    items: compactItems,
+  };
+
+  const response = await fetch("https://api.deepseek.com/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify({
+      model: DEEPSEEK_MODEL,
+      temperature: 0.4,
+      messages: [
+        {
+          role: "system",
+          content: "你是一个中文 AI 产品与创业信息源编辑。你只输出 JSON，不输出 Markdown，不输出解释。",
+        },
+        {
+          role: "user",
+          content: `请根据以下 JSON 生成日报内容，严格返回 JSON：\n${JSON.stringify(prompt)}`,
+        },
+      ],
+    }),
+  });
+
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(`DeepSeek API error: ${body.error?.message || body.message || response.status}`);
+  }
+
+  return validateModelDigest(extractJson(body.choices?.[0]?.message?.content));
+}
+
 function inWindow(value, window) {
   if (!value) return false;
   const date = new Date(value);
@@ -240,7 +327,7 @@ function sourceAnchor(item, index) {
 
 function renderThemeSummary(group, sourceMap) {
   const refs = group.items
-    .slice(0, 5)
+    .slice(0, 8)
     .map((item) => `<a href="#${sourceMap.get(item)}">${escapeHtml(item.sourceName)}</a>`)
     .join("，");
 
@@ -259,38 +346,66 @@ function renderThemeSummary(group, sourceMap) {
       </div>`;
 }
 
-function renderItem(item, anchor) {
+function renderModelTheme(theme, itemsByAnchor) {
+  const refs = (theme.sourceIds || [])
+    .map((id) => itemsByAnchor.get(id))
+    .filter(Boolean)
+    .slice(0, 8)
+    .map((item) => `<a href="#${sourceAnchor(item.item, item.index)}">${escapeHtml(item.item.sourceName)}</a>`)
+    .join("，");
+
+  return `
+      <div class="block">
+        <span class="label">${escapeHtml(theme.label || "主题")}</span>
+        <h3>${escapeHtml(theme.title || "")}</h3>
+        <p>${escapeHtml(theme.summary || "")}</p>
+        <p>为什么可能重要：${escapeHtml(theme.why || "这是一条值得继续观察的变化。")}</p>
+        <p class="meta">信息来源：${refs || "见下方信息源更新概览"}</p>
+      </div>`;
+}
+
+function renderItem(item, anchor, summaryMap = new Map()) {
   const title = item.type === "x"
     ? `${item.sourceName} 的 X 更新`
     : `${item.sourceName} - ${item.title}`;
+  const summary = summaryMap.get(anchor) || chineseSummary(item);
 
   return `
         <div class="item" id="${anchor}">
           <p class="meta">${escapeHtml(formatDateTime(item.date))}</p>
           <h3>${escapeHtml(title)}</h3>
-          <div class="quote">${escapeHtml(truncate(chineseSummary(item), 520))}</div>
+          <div class="quote">${escapeHtml(truncate(summary, 620))}</div>
           <p><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>`;
 }
 
-function renderItems(items, emptyText, anchorPrefix) {
+function renderItems(items, emptyText, anchorPrefix, summaryMap = new Map()) {
   if (!items.length) {
     return `<p>${escapeHtml(emptyText)}</p>`;
   }
-  return items.map((item, index) => renderItem(item, `${anchorPrefix}-${index + 1}`)).join("\n");
+  return items.map((item, index) => renderItem(item, `${anchorPrefix}-${index + 1}`, summaryMap)).join("\n");
 }
 
-function renderHtml({ date, window, xItems, podcastItems, blogItems }) {
+function renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest }) {
   const allItems = [...xItems, ...podcastItems, ...blogItems];
   const sourceMap = new Map();
   xItems.forEach((item, index) => sourceMap.set(item, `x-${index + 1}`));
   podcastItems.forEach((item, index) => sourceMap.set(item, `podcast-${index + 1}`));
   blogItems.forEach((item, index) => sourceMap.set(item, `blog-${index + 1}`));
+  const itemsByAnchor = new Map();
+  xItems.forEach((item, index) => itemsByAnchor.set(`x-${index + 1}`, { item, index }));
+  podcastItems.forEach((item, index) => itemsByAnchor.set(`podcast-${index + 1}`, { item, index }));
+  blogItems.forEach((item, index) => itemsByAnchor.set(`blog-${index + 1}`, { item, index }));
+  const summaryMap = new Map(
+    (modelDigest?.itemSummaries || [])
+      .filter((entry) => entry?.id && entry?.summary)
+      .map((entry) => [entry.id, entry.summary]),
+  );
   const groups = classify(allItems);
   const title = `Everyday AI Newsletter｜${ymd(date)}`;
-  const lede = allItems.length
+  const lede = modelDigest?.lede || (allItems.length
     ? `本期整体看，更新主要集中在${groups.slice(0, 3).map((group) => group.label).join("、")}。比较值得留意的是：开发工具正在从“能生成”进入“能管理复杂任务”的阶段，模型路由和成本效率开始成为应用层产品能力，而内容与创业生态里的信号也在提醒我们，AI 产品不只是技术性能，还包括人、组织和分发方式。`
-    : `本期窗口内暂无新更新。页面仍保留固定结构，方便你确认自动化流程。`;
+    : `本期窗口内暂无新更新。页面仍保留固定结构，方便你确认自动化流程。`);
 
   return `<!doctype html>
 <html lang="zh-CN">
@@ -351,21 +466,21 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems }) {
 
     <section id="what-happened">
       <h2>今天发生了什么</h2>
-      ${groups.length ? groups.map((group) => renderThemeSummary(group, sourceMap)).join("\n") : '<div class="block"><p>本窗口暂无新内容。今天发生了什么这一节会在有更新时跨来源整理共同主题。</p></div>'}
+      ${modelDigest?.themes?.length ? modelDigest.themes.map((theme) => renderModelTheme(theme, itemsByAnchor)).join("\n") : (groups.length ? groups.map((group) => renderThemeSummary(group, sourceMap)).join("\n") : '<div class="block"><p>本窗口暂无新内容。今天发生了什么这一节会在有更新时跨来源整理共同主题。</p></div>')}
     </section>
 
     <section id="source-overview">
       <h2>信息源更新概览</h2>
-      <div class="source" id="x-updates"><span class="label">X 更新的信息</span>${renderItems(xItems, "本窗口暂无 X 更新。", "x")}</div>
-      <div class="source" id="podcasts"><span class="label">播客</span>${renderItems(podcastItems, "本窗口暂无播客更新。", "podcast")}</div>
-      <div class="source" id="blogs"><span class="label">博客</span>${renderItems(blogItems, "本窗口暂无博客更新。", "blog")}</div>
+      <div class="source" id="x-updates"><span class="label">X 更新的信息</span>${renderItems(xItems, "本窗口暂无 X 更新。", "x", summaryMap)}</div>
+      <div class="source" id="podcasts"><span class="label">播客</span>${renderItems(podcastItems, "本窗口暂无播客更新。", "podcast", summaryMap)}</div>
+      <div class="source" id="blogs"><span class="label">博客</span>${renderItems(blogItems, "本窗口暂无博客更新。", "blog", summaryMap)}</div>
     </section>
 
     <section id="product-signals">
       <h2>产品与观点线索</h2>
       <div class="block">
         <ul>
-          ${groups.length ? groups.map((group) => `<li><strong>${escapeHtml(group.label)}：</strong>${escapeHtml(group.title)}</li>`).join("\n") : "<li>暂无足够新内容形成产品线索。</li>"}
+          ${modelDigest?.productSignals?.length ? modelDigest.productSignals.map((signal) => `<li>${escapeHtml(signal)}</li>`).join("\n") : (groups.length ? groups.map((group) => `<li><strong>${escapeHtml(group.label)}：</strong>${escapeHtml(group.title)}</li>`).join("\n") : "<li>暂无足够新内容形成产品线索。</li>")}
         </ul>
       </div>
     </section>
@@ -374,9 +489,9 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems }) {
       <h2>可继续观察的问题</h2>
       <div class="block">
         <ul>
-          <li>今天出现的 agent 或工作流信号，是一次性动态，还是会连续几天被不同来源提到？</li>
+          ${modelDigest?.watchQuestions?.length ? modelDigest.watchQuestions.map((question) => `<li>${escapeHtml(question)}</li>`).join("\n") : `<li>今天出现的 agent 或工作流信号，是一次性动态，还是会连续几天被不同来源提到？</li>
           <li>这些更新里提到的产品方向，是否对应明确用户场景，而不只是工具热度？</li>
-          <li>如果某个主题连续出现，是否值得单独整理成自己的信息源标签？</li>
+          <li>如果某个主题连续出现，是否值得单独整理成自己的信息源标签？</li>`}
         </ul>
       </div>
     </section>
@@ -430,7 +545,13 @@ async function main() {
   ]);
 
   const { xItems, podcastItems, blogItems } = collectItems(feedX, feedPodcasts, feedBlogs, window);
-  const html = renderHtml({ date, window, xItems, podcastItems, blogItems });
+  let modelDigest = null;
+  try {
+    modelDigest = await generateModelDigest({ window, xItems, podcastItems, blogItems });
+  } catch (error) {
+    console.warn(`DeepSeek digest generation failed, falling back to rules: ${error.message}`);
+  }
+  const html = renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest });
   const index = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url=${fileName}"><title>Everyday AI Newsletter</title></head><body><p><a href="${fileName}">打开最新一期</a></p></body></html>`;
 
   await fs.mkdir(PUBLIC_DIR, { recursive: true });
