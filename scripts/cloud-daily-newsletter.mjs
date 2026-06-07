@@ -184,7 +184,8 @@ async function generateModelDigest({ window, xItems, podcastItems, blogItems }) 
   const prompt = {
     window: `${formatDateTime(window.start)} 至 ${formatDateTime(window.end)} Asia/Shanghai`,
     requirements: [
-      "输出必须是简体中文，除 AI、LLM、agent、prompt、token、API、evals 等常用技术词外，不要保留英文原文。",
+      "输出必须是简体中文。正文里尽量不要保留英文技术词：agent 写作“智能体”，LLM 写作“大语言模型”，token 写作“词元”，evals 写作“评测”。",
+      "人名、公司名、产品名、X、URL 可以保留英文；标题由系统固定使用 Everyday AI Newsletter｜YYYY-MM-DD。",
       "标题不需要生成，标题固定由系统使用 Everyday AI Newsletter｜YYYY-MM-DD。",
       "lede 是标题下方的本期整体概览，不要只是统计数量，要概括本期整体形状。",
       "themes 是“今天发生了什么”，必须跨 X、播客、博客综合共同主题、变化方向、产品/agent/创业相关类别，不要按信息源类型分类。",
