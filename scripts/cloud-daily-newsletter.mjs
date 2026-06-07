@@ -13,26 +13,50 @@ const RECIPIENT = "kt951218@163.com";
 
 const TOPICS = [
   {
-    label: "Agent / 上下文层",
-    keywords: ["agent", "agents", "gbrain", "openclaw", "hermes", "memory", "context", "mcp", "cowork", "claude", "codex"],
-    title: "agent 产品继续往上下文、记忆和执行环境靠拢",
+    label: "模型路由与成本效率",
+    keywords: ["routing", "token", "cost", "evals", "quality/cost", "cheapest model", "right model", "model diversity", "open-weight"],
+    title: "模型路由正在从工程细节变成应用层产品能力",
+    why: "当企业真正开始大规模使用大语言模型，成本和质量的取舍就会变成产品问题。谁能知道某个任务该用强模型、便宜模型还是开源模型，谁就能在效果和成本之间做出更好的产品设计。",
   },
   {
-    label: "产品 / 工作流",
-    keywords: ["product", "workflow", "figma", "cursor", "replit", "vercel", "shopify", "tool", "skills", "software", "build"],
-    title: "产品和工作流更新仍在围绕“更快构建、更好交付”展开",
+    label: "智能体与开发工作流",
+    keywords: ["agent", "agents", "agentic", "codex", "paxel", "vibe", "coding", "threads", "approval", "local models"],
+    title: "智能体编码和开发工作流继续变得更上头，也更需要管理界面",
+    why: "这类更新说明，开发者不是只在尝鲜，而是在真的把智能体放进日常工作。新的问题随之出现：线程怎么管理、任务怎么筛选、本地与云端边界怎么解释、哪些步骤该交给模型。产品机会会从“能不能生成代码”转向“能不能把复杂工作流管顺”。",
   },
   {
-    label: "创业 / 生态",
-    keywords: ["startup", "founder", "vc", "yc", "capital", "funding", "valuation", "company"],
-    title: "创业生态里的速度、资本和长期建设仍在互相拉扯",
+    label: "内容形态与创作者互动",
+    keywords: ["static content", "live interaction", "conference", "research paper", "publishing", "human being", "raw", "opinionated"],
+    title: "静态内容的价值被重新估价，实时互动和个人观点更受重视",
+    why: "这条线索和产品有关：内容、软件、会议和社区都在从“发布一个成品”转向“让用户接触到背后的人和判断”。这会影响知识产品、开发者社区、会议和创作者工具的形态。",
   },
   {
-    label: "模型 / 基础设施",
-    keywords: ["model", "llm", "gpu", "infra", "sandbox", "storage", "api", "eval", "fine-tuning", "token"],
-    title: "模型与基础设施信号继续影响产品形态",
+    label: "创业、世界模型与生态关系",
+    keywords: ["world models", "world model", "startup", "company", "investors", "stealth", "ceo", "latency", "vc", "gaza", "local government"],
+    title: "创业生态里既有世界模型的新公司故事，也有资本与价值观的摩擦",
+    why: "这些内容不是纯产品发布，但会影响创业者如何选择方向、投资人和团队。尤其是世界模型、低延迟、游戏与三维生成这些关键词，可能会成为下一批空间智能产品的基础。",
   },
 ];
+
+const MANUAL_SUMMARIES = {
+  "2063491534339936584": "Peter Yang 发了一条简短的晚安动态，信息量较低，保留为窗口内更新。",
+  "2063486871037153558": "Peter Yang 调侃智能体编码非常容易让人上头，甚至比游戏还让人停不下来。可以看成开发者对智能体编程体验的真实反馈。",
+  "2063475353335869922": "Peter Yang 希望 Codex 线程能支持更多筛选和排序方式，例如查看所有等待批准的任务、所有正在运行的任务，而不只是按项目分组。",
+  "2063438262841094604": "Dan Shipper 借柏拉图对技艺、敬畏和正义的讨论，延伸到大语言模型：知识从哪里来、德性是否能被教授，这些古典问题又被新技术重新打开。",
+  "2063436919967522848": "Dan Shipper 补充说，敬畏他人和判断何为正确的能力会变得更重要。这是在把技术能力和人类判断放在一起讨论。",
+  "2063432747432268259": "Swyx 认为，研究论文和实验室公开发布的吸引力下降，部分原因是研究者可以带着隐性知识直接创业。他也提到想把 AI Engineer 做成更偏产品的行业会议。",
+  "2063426632824562167": "Dan Shipper 用一句话表达对大语言模型意识问题的暧昧态度：既不能简单说有意识，也不能简单说完全没有意识。",
+  "2063418130714800487": "Garry Tan 澄清 Paxel 的数据边界：他们没有说完全不上传用户数据，而是说代码文件内容不会上传。随着本地模型变强，更多能力有机会在本地完成。",
+  "2063409501706018903": "Garry Tan 表示希望 Paxel 帮助人们变得更专业、更像真正的建设者。",
+  "2063391758189572266": "Zara Zhang 赞同一个观点：静态内容的价值在下降，实时互动的价值在上升。用户想连接作品背后真实的人，偏原始、有观点的表达比精致但泛化的内容更有吸引力。",
+  "2063381764782116914": "Nikunj Kothari 发了一条周末提醒，建议大家出去走走、接触现实世界。信息量不高，但保留为窗口内更新。",
+  "2063344460705288401": "Amjad Masad 谈到自己公开表达政治立场后，一些投资人试图施压，也有更好的投资人支持他。他的重点是：坚持信念会筛掉不合适的人。",
+  "2063342268472574268": "Madhu Guru 详细解释模型路由为什么难：要把不同任务匹配到合适模型，需要针对产品任务做评测，并平衡质量和成本。他把企业采用模型的过程分成三个阶段：先默认用热门模型，再过度追求便宜模型，最后走向更细致的任务路由。",
+  "2063320673217609936": "Aaron Levie 认为 token 成本已经成为企业 AI 的热门话题，这反而说明系统正在被大规模使用。他认为应用层 AI 的差异化会越来越来自模型路由、领域工作流理解和评测能力。",
+  "2063300737296400516": "Amjad Masad 提到 Vibecon，像是围绕 vibe coding 或建设者社区的活动动态。",
+  "2063280482922663980": "Garry Tan 谈到地方治理，认为 Oakland 的管理问题可以修复，但还缺少类似旧金山那样的常识回归。这条偏公共事务，和 AI 产品关联较弱。",
+  "2063263389238087745": "Nikunj Kothari 发布了一期访谈目录，主题包括世界模型、从文本到三维的创业起点、为什么创办公司、游戏和编程经历、低延迟的重要性、成为 CEO 和扩展团队等。",
+};
 
 function shanghaiParts(date) {
   const parts = new Intl.DateTimeFormat("en-CA", {
@@ -87,6 +111,33 @@ function escapeHtml(value) {
 function truncate(text, max = 260) {
   const clean = String(text || "").replace(/\s+/g, " ").trim();
   return clean.length > max ? `${clean.slice(0, max - 1)}…` : clean;
+}
+
+function itemId(item) {
+  return String(item.url || "").split("/").pop();
+}
+
+function chineseSummary(item) {
+  const manual = MANUAL_SUMMARIES[itemId(item)];
+  if (manual) return manual;
+
+  const text = `${item.title} ${item.text}`.toLowerCase();
+  if (text.includes("routing") || text.includes("token") || text.includes("model")) {
+    return `${item.sourceName} 讨论了模型选择、成本或任务路由问题，重点是如何在质量、速度和价格之间做取舍。`;
+  }
+  if (text.includes("agent") || text.includes("codex") || text.includes("coding")) {
+    return `${item.sourceName} 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。`;
+  }
+  if (text.includes("startup") || text.includes("founder") || text.includes("investor") || text.includes("company")) {
+    return `${item.sourceName} 更新了创业或团队建设相关内容，可能和 AI 创业生态的节奏、融资和组织判断有关。`;
+  }
+  if (item.type === "podcast") {
+    return `${item.sourceName} 发布了新播客，主题是 ${item.title}。`;
+  }
+  if (item.type === "blog") {
+    return `${item.sourceName} 发布了新文章，主题是 ${item.title}。`;
+  }
+  return `${item.sourceName} 有一条窗口内更新，原文信息较短，先作为补充动态保留。`;
 }
 
 function inWindow(value, window) {
@@ -161,24 +212,25 @@ function collectItems(feedX, feedPodcasts, feedBlogs, window) {
 }
 
 function classify(items) {
-  const used = new Set();
   const groups = [];
+  const remaining = new Set(items);
 
   for (const topic of TOPICS) {
-    const matches = items.filter((item) => {
+    const matches = [...remaining].filter((item) => {
       const text = `${item.title} ${item.text}`.toLowerCase();
       return topic.keywords.some((keyword) => text.includes(keyword));
     });
     if (!matches.length) continue;
-    for (const match of matches) used.add(match);
+    for (const match of matches) remaining.delete(match);
     groups.push({ ...topic, items: matches });
   }
 
-  const other = items.filter((item) => !used.has(item));
+  const other = [...remaining];
   if (other.length) {
     groups.push({
-      label: "其他 / 低信号",
+      label: "其他补充信息",
       title: "还有一些更新更像补充信息，先保留但不强行解读",
+      why: "不是所有窗口内更新都值得强行归纳成趋势。这里保留低信号或偏题内容，是为了让你知道信息源确实有更新，同时不把它包装成过度结论。",
       items: other,
     });
   }
@@ -198,7 +250,7 @@ function renderThemeSummary(group, sourceMap) {
 
   const examples = group.items
     .slice(0, 3)
-    .map((item) => escapeHtml(truncate(item.text || item.title, 130)))
+    .map((item) => escapeHtml(truncate(chineseSummary(item), 150)))
     .join(" / ");
 
   return `
@@ -206,21 +258,21 @@ function renderThemeSummary(group, sourceMap) {
         <span class="label">${escapeHtml(group.label)}</span>
         <h3>${escapeHtml(group.title)}</h3>
         <p>${examples || "这个主题在本窗口内有更新，但原始文本较短，适合先标记为观察项。"}</p>
-        <p>为什么可能重要：这类更新能帮助你判断 AI 产品正在往哪里卷：是模型能力、agent 执行、产品体验，还是创业生态里的预期变化。这里先把线索摊开，不替你做最终判断。</p>
+        <p>为什么可能重要：${escapeHtml(group.why)}</p>
         <p class="meta">信息来源：${refs}</p>
       </div>`;
 }
 
 function renderItem(item, anchor) {
   const title = item.type === "x"
-    ? `${item.sourceName}${item.handle ? ` (${item.handle} on X)` : ""}`
+    ? `${item.sourceName} 的 X 更新`
     : `${item.sourceName} - ${item.title}`;
 
   return `
         <div class="item" id="${anchor}">
           <p class="meta">${escapeHtml(formatDateTime(item.date))}</p>
           <h3>${escapeHtml(title)}</h3>
-          <div class="quote">${escapeHtml(truncate(item.text || item.title, 520))}</div>
+          <div class="quote">${escapeHtml(truncate(chineseSummary(item), 520))}</div>
           <p><a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>`;
 }
@@ -241,8 +293,8 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems }) {
   const groups = classify(allItems);
   const title = `Everyday AI Newsletter｜${ymd(date)}`;
   const lede = allItems.length
-    ? `这期覆盖 ${formatDateTime(window.start)} 到 ${formatDateTime(window.end)}。窗口内共有 ${xItems.length} 条 X 更新、${podcastItems.length} 条播客更新、${blogItems.length} 条博客更新。下面先按主题看变化，再按信息源展开明细。`
-    : `这期覆盖 ${formatDateTime(window.start)} 到 ${formatDateTime(window.end)}。当前 feed 在这个窗口内没有抓到新更新，下面保留结构，方便你确认日报流程。`;
+    ? `本期整体看，更新主要集中在${groups.slice(0, 3).map((group) => group.label).join("、")}。比较值得留意的是：开发工具正在从“能生成”进入“能管理复杂任务”的阶段，模型路由和成本效率开始成为应用层产品能力，而内容与创业生态里的信号也在提醒我们，AI 产品不只是技术性能，还包括人、组织和分发方式。`
+    : `本期窗口内暂无新更新。页面仍保留固定结构，方便你确认自动化流程。`;
 
   return `<!doctype html>
 <html lang="zh-CN">
