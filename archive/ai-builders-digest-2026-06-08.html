@@ -40,7 +40,7 @@
     <header>
       <p class="meta">发送窗口：06/07 13:10 至 06/08 13:10，Asia/Shanghai</p>
       <h1>Everyday AI Newsletter｜2026-06-08</h1>
-      <p class="lede">本期内容聚焦于 Peter Yang 在 X 上的一条简短更新，虽信息量有限，但反映了个人化、生活化的社交动态，整体呈现轻松、非技术性的氛围。</p>
+      <p class="lede">本期日报围绕“智能体循环”这一核心概念展开，多位行业领袖和创业者分享了关于如何从简单的提示词交互转向设计自动化循环、模型分层与成本优化、以及AI工具普及带来的新瓶颈等关键洞察。同时，也探讨了训练数据的高价值、企业软件市场的真实成本结构，以及即将到来的WWDC可能带来的变化。整体呈现出从“使用AI”到“设计AI系统”的认知升级趋势。</p>
       <div class="note">本页由 GitHub Actions 云端生成和发布，不依赖你的 Mac 是否开机或联网。</div>
       <nav class="toc" aria-label="日报目录">
         <a href="#what-happened">今天发生了什么</a>
@@ -49,7 +49,7 @@
         <a href="#watch-questions">可继续观察的问题</a>
       </nav>
       <div class="grid">
-        <a class="metric" href="#x-updates"><strong>1</strong><span class="meta">X 更新的信息</span></a>
+        <a class="metric" href="#x-updates"><strong>20</strong><span class="meta">X 更新的信息</span></a>
         <a class="metric" href="#podcasts"><strong>0</strong><span class="meta">播客</span></a>
         <a class="metric" href="#blogs"><strong>0</strong><span class="meta">博客</span></a>
       </div>
@@ -59,11 +59,59 @@
       <h2>今天发生了什么</h2>
       
       <div class="block">
-        <span class="label">个人动态</span>
-        <h3>Peter Yang 发布晚安问候</h3>
-        <p>Peter Yang 在 X 上发布了一条简短的“晚安”消息，并附带了图片链接，内容为个人生活分享。</p>
-        <p>为什么可能重要：作为科技领域关注者，Peter Yang 的此类更新可能暗示其工作节奏或生活状态，但本条内容未提供具体业务或产品线索。</p>
-        <p class="meta">信息来源：<a href="#x-1">Peter Yang</a></p>
+        <span class="label">智能体循环与自动化设计</span>
+        <h3>从“提示”到“循环”：智能体工作流的新范式</h3>
+        <p>多位X用户（Peter Yang, Boris Cherny, Peter Steinberger）强调，在AI编程和任务自动化中，核心已不再是编写单次提示，而是设计能够持续运行的“循环”（loop）。Boris Cherny分享了让Claude Opus自主运行数小时/数天的五个技巧，包括使用自动模式、动态工作流和自验证机制。Peter Yang则通过一个幽默的“倒垃圾”对话，形象地说明了这一理念的普及。</p>
+        <p>为什么可能重要：这标志着AI应用从“辅助工具”向“自主智能体”的转变，设计循环而非提示词，是构建可靠、持续运行的AI系统的关键。</p>
+        <p class="meta">信息来源：<a href="#x-3">Peter Yang</a>，<a href="#x-4">Peter Yang</a>，<a href="#x-5">Boris Cherny</a>，<a href="#x-17">Peter Steinberger</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">模型分层与成本优化</span>
+        <h3>模型市场将分层：前沿模型与廉价模型各司其职</h3>
+        <p>Aaron Levie预测，未来一两年内，用例将根据模型家族分层：前沿模型用于高端任务，廉价模型用于高吞吐量工作负载。他认为，能够高效地将工作负载路由到正确模型的“路由层”将变得极具价值，这是AI智能体领域的新难题。Nikunj Kothari则观察到，业界情绪已从“词元焦虑”转向“词元优化”，但他仍主张公司应给予员工充足的词元预算以探索前沿。</p>
+        <p>为什么可能重要：模型分层和路由优化是AI规模化部署的经济学核心，直接影响企业AI应用的ROI和架构设计。</p>
+        <p class="meta">信息来源：<a href="#x-1">Aaron Levie</a>，<a href="#x-20">Nikunj Kothari</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">AI工具普及的新瓶颈</span>
+        <h3>教育用户使用AI工具成为新的严重瓶颈</h3>
+        <p>Garry Tan指出，教育人们如何使用AI工具已成为一个严重的瓶颈，这也是他们创建相关平台的原因。同时，他展示了GBrain v0.42.30版本的新功能，可以详细总结用户思维随时间的变化。Sam Altman也对此发表了评论，认为这形成了一个有趣的递归循环。</p>
+        <p>为什么可能重要：随着AI工具能力的增强，用户教育和技能提升成为制约生产力提升的关键因素，催生了新的创业机会。</p>
+        <p class="meta">信息来源：<a href="#x-6">Garry Tan</a>，<a href="#x-7">Garry Tan</a>，<a href="#x-8">Garry Tan</a>，<a href="#x-9">Sam Altman</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">企业软件市场的真实成本</span>
+        <h3>AI并未降低企业软件的市场进入成本，反而可能增加</h3>
+        <p>Aaron Levie分析，市场误判了AI对企业软件的影响。虽然AI使软件开发更容易，但企业软件公司的大部分成本在于市场进入（GTM），包括咨询式销售、实施和集成支持。AI不仅没有减少这一需求，反而因市场更加拥挤和复杂而增加了需求。</p>
+        <p>为什么可能重要：这一观点挑战了“AI将大幅降低软件创业门槛”的普遍认知，提醒创业者关注市场进入策略而非仅关注技术开发。</p>
+        <p class="meta">信息来源：<a href="#x-11">Aaron Levie</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">训练数据的高价值</span>
+        <h3>高质量训练数据是推动模型前沿的关键，且高度稀缺</h3>
+        <p>Madhu Guru澄清了一个常见误解：训练数据并非低技能工作。推动模型前沿需要高经济价值任务的训练数据，而这些任务大多缺乏文档，涉及复杂的领域知识和遗留工具。因此，像Mercor这样创建训练数据的公司，其工作具有极高的杠杆作用和技能要求。</p>
+        <p>为什么可能重要：这揭示了AI发展的核心瓶颈之一：高质量、高价值数据的稀缺性，以及数据工程在AI进步中的关键作用。</p>
+        <p class="meta">信息来源：<a href="#x-16">Madhu Guru</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">平台与工具动态</span>
+        <h3>Vercel AI Gateway、Box、Replit等平台持续演进</h3>
+        <p>Guillermo Rauch宣布Vercel AI Gateway每月平均恢复超过1万亿词元，且零加价。Box推出了网页端Markdown编辑器、完整CLI支持和版本历史，并支持通过Box Drive连接桌面客户端。Replit的Amjad Masad祝贺用户成功，强调平台致力于消除干扰。Thibault Sottiaux则宣布了Codex的“大按钮”计划，每天奖励一位用户10倍使用额度。</p>
+        <p>为什么可能重要：这些更新反映了AI基础设施和协作工具正在快速成熟，旨在降低开发者门槛、提升效率并促进创新。</p>
+        <p class="meta">信息来源：<a href="#x-12">Thibault Sottiaux</a>，<a href="#x-13">Amjad Masad</a>，<a href="#x-15">Guillermo Rauch</a>，<a href="#x-18">Aaron Levie</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">文化与社区现象</span>
+        <h3>AI原生文化扩散：从幻灯片到IPO流动性</h3>
+        <p>Zara Zhang观察到，使用HTML制作幻灯片被视为更“AI原生”和“AI精通”的标志，这种社交传播促进了技能的有机增长。Aditya Agarwal则分享了IPO带来的流动性如何驱动硅谷的创新循环，鼓励人们用财富去做更疯狂、更有趣的事情。</p>
+        <p>为什么可能重要：这些现象表明，AI不仅改变了工具，也在重塑工作文化、社交信号和创业生态。</p>
+        <p class="meta">信息来源：<a href="#x-14">Aditya Agarwal</a>，<a href="#x-19">Zara Zhang</a></p>
       </div>
     </section>
 
@@ -71,10 +119,143 @@
       <h2>信息源更新概览</h2>
       <div class="source" id="x-updates"><span class="label">X 更新的信息</span>
         <div class="item" id="x-1">
-          <p class="meta">06/07 13:21</p>
+          <p class="meta">06/08 12:09</p>
+          <h3>Aaron Levie 的 X 更新</h3>
+          <div class="quote">Aaron Levie 预测未来模型将分层，前沿模型用于高端任务，廉价模型用于高吞吐量，而高效路由工作负载的中间层将变得极具价值。</div>
+          <p><a href="https://x.com/levie/status/2063835799096090749" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-2">
+          <p class="meta">06/08 11:44</p>
+          <h3>Nikunj Kothari 的 X 更新</h3>
+          <div class="quote">Nikunj Kothari 暗示苹果在WWDC上有可能做出关于“循环”的有趣举动。</div>
+          <p><a href="https://x.com/nikunj/status/2063829369949467050" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-3">
+          <p class="meta">06/08 11:04</p>
           <h3>Peter Yang 的 X 更新</h3>
-          <div class="quote">Peter Yang 在 X 上发布了一条“晚安”消息，并附带了图片链接，内容为个人生活分享，未涉及具体技术或产品讨论。</div>
-          <p><a href="https://x.com/petergyang/status/2063491534339936584" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <div class="quote">Peter Yang 分享了一个关于“循环”的幽默对话，妻子将婚姻比作循环，将丈夫比作每日定时任务。</div>
+          <p><a href="https://x.com/petergyang/status/2063819323106615434" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-4">
+          <p class="meta">06/08 10:58</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 以“倒垃圾”的对话为例，引出“设计循环而非提示”的父级笑话，邀请用户完成。</div>
+          <p><a href="https://x.com/petergyang/status/2063818032280170721" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-5">
+          <p class="meta">06/08 09:16</p>
+          <h3>Boris Cherny 的 X 更新</h3>
+          <div class="quote">Boris Cherny 分享了让 Claude Opus 自主运行数小时/天的五个技巧，包括自动模式、动态工作流、使用/goal或/loop、云端运行Claude Code以及自验证机制。</div>
+          <p><a href="https://x.com/bcherny/status/2063792263067754658" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-6">
+          <p class="meta">06/08 08:52</p>
+          <h3>Garry Tan 的 X 更新</h3>
+          <div class="quote">Garry Tan 解释了为何他们创建了某个平台，以应对AI工具教育成为瓶颈的问题。</div>
+          <p><a href="https://x.com/garrytan/status/2063786182140735829" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-7">
+          <p class="meta">06/08 08:52</p>
+          <h3>Garry Tan 的 X 更新</h3>
+          <div class="quote">Garry Tan 指出教育人们使用AI工具已成为一个严重的瓶颈。</div>
+          <p><a href="https://x.com/garrytan/status/2063786111588323780" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-8">
+          <p class="meta">06/08 08:48</p>
+          <h3>Garry Tan 的 X 更新</h3>
+          <div class="quote">Garry Tan 展示了GBrain v0.42.30的新功能，可以详细总结用户思维随时间的变化。</div>
+          <p><a href="https://x.com/garrytan/status/2063785286367392095" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-9">
+          <p class="meta">06/08 08:25</p>
+          <h3>Sam Altman 的 X 更新</h3>
+          <div class="quote">Sam Altman 对Garry Tan的帖子评论，认为这形成了一个有趣的递归循环。</div>
+          <p><a href="https://x.com/sama/status/2063779477419901071" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-10">
+          <p class="meta">06/08 08:00</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 分享了他提到的两个链接：关于Compound Engineering的文章和Kun Chen的免费工具。</div>
+          <p><a href="https://x.com/petergyang/status/2063773025196192188" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-11">
+          <p class="meta">06/08 06:53</p>
+          <h3>Aaron Levie 的 X 更新</h3>
+          <div class="quote">Aaron Levie 认为市场误判了AI对企业软件的影响，AI并未降低市场进入成本，反而因市场更复杂而增加了需求。</div>
+          <p><a href="https://x.com/levie/status/2063756386572681606" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-12">
+          <p class="meta">06/08 06:21</p>
+          <h3>Thibault Sottiaux 的 X 更新</h3>
+          <div class="quote">Thibault Sottiaux 宣布了Codex的“大按钮”计划，未来100天内每天奖励一位用户10倍使用额度。</div>
+          <p><a href="https://x.com/thsottiaux/status/2063748242681307611" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-13">
+          <p class="meta">06/08 06:05</p>
+          <h3>Amjad Masad 的 X 更新</h3>
+          <div class="quote">Amjad Masad 祝贺Replit用户成功，强调平台致力于消除干扰，让用户专注于市场。</div>
+          <p><a href="https://x.com/amasad/status/2063744208587125142" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-14">
+          <p class="meta">06/08 05:16</p>
+          <h3>Aditya Agarwal 的 X 更新</h3>
+          <div class="quote">Aditya Agarwal 分享了对IPO流动性的观察，认为财富会放大深层欲望，许多人会用它来启动更疯狂的新事物，保持硅谷的创新循环。</div>
+          <p><a href="https://x.com/adityaag/status/2063731771284619521" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-15">
+          <p class="meta">06/08 04:08</p>
+          <h3>Guillermo Rauch 的 X 更新</h3>
+          <div class="quote">Guillermo Rauch 宣布Vercel AI Gateway每月平均恢复超过1万亿词元，且零加价，类似Stripe的智能重试机制。</div>
+          <p><a href="https://x.com/rauchg/status/2063714700618334260" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-16">
+          <p class="meta">06/08 03:27</p>
+          <h3>Madhu Guru 的 X 更新</h3>
+          <div class="quote">Madhu Guru 澄清了关于训练数据的误解，指出高经济价值任务的训练数据高度稀缺且复杂，创建这些数据的公司（如Mercor）工作价值极高。</div>
+          <p><a href="https://x.com/realmadhuguru/status/2063704354910347520" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-17">
+          <p class="meta">06/08 02:58</p>
+          <h3>Peter Steinberger 的 X 更新</h3>
+          <div class="quote">Peter Steinberger 提醒用户，不应再提示编程智能体，而应设计循环来提示智能体。</div>
+          <p><a href="https://x.com/steipete/status/2063697162748260627" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-18">
+          <p class="meta">06/07 23:49</p>
+          <h3>Aaron Levie 的 X 更新</h3>
+          <div class="quote">Aaron Levie 宣布Box推出了网页端Markdown编辑器、CLI支持、评论和版本历史，并支持通过Box Drive连接桌面客户端。</div>
+          <p><a href="https://x.com/levie/status/2063649508681224367" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-19">
+          <p class="meta">06/07 23:04</p>
+          <h3>Zara Zhang 的 X 更新</h3>
+          <div class="quote">Zara Zhang 认为使用HTML制作幻灯片被视为更AI原生和AI精通，这种社交传播促进了技能的有机增长。</div>
+          <p><a href="https://x.com/zarazhangrui/status/2063638307586662539" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-20">
+          <p class="meta">06/07 22:32</p>
+          <h3>Nikunj Kothari 的 X 更新</h3>
+          <div class="quote">Nikunj Kothari 观察到业界情绪从“词元焦虑”转向“词元优化”，但他仍主张公司应给予员工充足的词元预算以探索前沿。</div>
+          <p><a href="https://x.com/nikunj/status/2063630238123483195" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div></div>
       <div class="source" id="podcasts"><span class="label">播客</span><p>本窗口暂无播客更新。</p></div>
       <div class="source" id="blogs"><span class="label">博客</span><p>本窗口暂无博客更新。</p></div>
@@ -85,6 +266,9 @@
       <div class="block">
         <ul>
           <li>[object Object]</li>
+<li>[object Object]</li>
+<li>[object Object]</li>
+<li>[object Object]</li>
         </ul>
       </div>
     </section>
@@ -93,8 +277,11 @@
       <h2>可继续观察的问题</h2>
       <div class="block">
         <ul>
-          <li>Peter Yang 的后续更新是否会涉及产品发布或行业观点？</li>
-<li>此类个人化动态是否反映其近期工作重心或社交活动？</li>
+          <li>模型路由层（如Vercel AI Gateway）是否会成为AI应用的标准组件？其商业模式和竞争壁垒是什么？</li>
+<li>在“设计循环”的范式下，现有的AI编程工具（如Cursor、Codex）将如何演进以支持更复杂的自主工作流？</li>
+<li>随着模型分层，企业将如何评估和选择不同层级的模型？是否会催生新的模型评测标准？</li>
+<li>用户教育瓶颈将如何被突破？是出现新的交互范式，还是需要专门的培训平台？</li>
+<li>苹果在WWDC上是否会推出与“循环”或智能体相关的重大更新？这将如何影响现有生态？</li>
         </ul>
       </div>
     </section>
