@@ -34,9 +34,9 @@ jobs:
       - name: Check today's newsletter state
         id: today
         run: |
-          file="ai-builders-digest-$(TZ=Asia/Shanghai date +%F).html"
-          echo "file=$file" >> "$GITHUB_OUTPUT"
-          if [ -f "$file" ]; then
+          date="$(TZ=Asia/Shanghai date +%F)"
+          echo "date=$date" >> "$GITHUB_OUTPUT"
+          if [ -f newsletter-date.txt ] && [ "$(cat newsletter-date.txt)" = "$date" ]; then
             echo "already_published=true" >> "$GITHUB_OUTPUT"
           else
             echo "already_published=false" >> "$GITHUB_OUTPUT"
@@ -54,7 +54,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html ai-builders-digest-*.html
+          git rm -f ai-builders-digest-*.html 2>/dev/null || true
+          git add index.html newsletter-date.txt
           if git diff --cached --quiet; then
             echo "No newsletter changes to commit."
             echo "published=false" >> "$GITHUB_OUTPUT"
@@ -66,7 +67,7 @@ jobs:
           fi
 
       - name: Send public link by email
-        if: steps.today.outputs.already_published != 'true' || github.event_name == 'workflow_dispatch'
+        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && steps.today.outputs.already_published != 'true')
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}

@@ -536,8 +536,7 @@ async function main() {
   const window = shanghaiWindow(now);
   const date = window.end;
   const dateSlug = ymd(date);
-  const fileName = `ai-builders-digest-${dateSlug}.html`;
-  const publicUrl = `${BASE_URL}${fileName}`;
+  const publicUrl = BASE_URL;
 
   const [feedX, feedPodcasts, feedBlogs] = await Promise.all([
     fetchSourceJson("feed-x.json"),
@@ -553,11 +552,10 @@ async function main() {
     console.warn(`DeepSeek digest generation failed, falling back to rules: ${error.message}`);
   }
   const html = renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest });
-  const index = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="refresh" content="0; url=${fileName}"><title>Everyday AI Newsletter</title></head><body><p><a href="${fileName}">打开最新一期</a></p></body></html>`;
 
   await fs.mkdir(PUBLIC_DIR, { recursive: true });
-  await fs.writeFile(path.join(PUBLIC_DIR, fileName), html);
-  await fs.writeFile(path.join(PUBLIC_DIR, "index.html"), index);
+  await fs.writeFile(path.join(PUBLIC_DIR, "index.html"), html);
+  await fs.writeFile(path.join(PUBLIC_DIR, "newsletter-date.txt"), `${dateSlug}\n`);
 
   if (process.env.SEND_EMAIL !== "false") {
     await sendEmail({ title: `Everyday AI Newsletter｜${ymd(date)}`, url: publicUrl });
