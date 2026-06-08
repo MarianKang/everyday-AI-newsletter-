@@ -83,7 +83,7 @@ function md(date) {
 
 function shanghaiWindow(now = new Date()) {
   const p = shanghaiParts(now);
-  const end = new Date(`${p.year}-${p.month}-${p.day}T05:30:00.000Z`);
+  const end = new Date(`${p.year}-${p.month}-${p.day}T05:10:00.000Z`);
   if (now < end) end.setUTCDate(end.getUTCDate() - 1);
   const start = new Date(end);
   start.setUTCDate(start.getUTCDate() - 1);
