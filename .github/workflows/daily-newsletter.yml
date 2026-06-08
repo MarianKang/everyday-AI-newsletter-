@@ -55,7 +55,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git rm -f ai-builders-digest-*.html 2>/dev/null || true
-          git add index.html newsletter-date.txt
+          git add index.html newsletter-date.txt archive
           if git diff --cached --quiet; then
             echo "No newsletter changes to commit."
             echo "published=false" >> "$GITHUB_OUTPUT"

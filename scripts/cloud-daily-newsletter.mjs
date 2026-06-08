@@ -8,6 +8,7 @@ const SOURCE_REPO = "zarazhangrui/follow-builders";
 const SOURCE_BRANCH = "main";
 const SOURCE_RAW = `https://raw.githubusercontent.com/${SOURCE_REPO}/${SOURCE_BRANCH}`;
 const PUBLIC_DIR = ".";
+const ARCHIVE_DIR = "archive";
 const TIME_ZONE = "Asia/Shanghai";
 const RECIPIENT = "kt951218@163.com";
 const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL || "deepseek-chat";
@@ -531,12 +532,65 @@ async function sendEmail({ title, url }) {
   }
 }
 
+async function renderArchiveIndex() {
+  const archivePath = path.join(PUBLIC_DIR, ARCHIVE_DIR);
+  let entries = [];
+  try {
+    entries = await fs.readdir(archivePath, { withFileTypes: true });
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+  }
+
+  const files = entries
+    .filter((entry) => entry.isFile() && /^ai-builders-digest-\d{4}-\d{2}-\d{2}\.html$/.test(entry.name))
+    .map((entry) => entry.name)
+    .sort()
+    .reverse();
+
+  const items = files.length
+    ? files.map((file) => {
+        const date = file.replace("ai-builders-digest-", "").replace(".html", "");
+        return `<li><a href="${escapeHtml(file)}">Everyday AI Newsletter｜${escapeHtml(date)}</a></li>`;
+      }).join("\n")
+    : "<li>暂无历史日报。</li>";
+
+  return `<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everyday AI Newsletter｜历史归档</title>
+  <style>
+    body { margin: 0; background: #f6f7f4; color: #1f2933; font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { width: min(820px, calc(100% - 28px)); margin: 0 auto; padding: 34px 0 52px; }
+    h1 { margin: 0 0 12px; font-size: clamp(30px, 6vw, 46px); line-height: 1.08; letter-spacing: 0; }
+    a { color: #1769aa; text-underline-offset: 3px; }
+    .meta { color: #667085; }
+    .panel { margin-top: 22px; padding: 18px; border: 1px solid #d9ded6; border-radius: 8px; background: #fff; }
+    li { margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="meta"><a href="../">打开最新一期</a></p>
+    <h1>Everyday AI Newsletter｜历史归档</h1>
+    <div class="panel">
+      <ul>
+${items}
+      </ul>
+    </div>
+  </main>
+</body>
+</html>`;
+}
+
 async function main() {
   const now = new Date();
   const window = shanghaiWindow(now);
   const date = window.end;
   const dateSlug = ymd(date);
-  const publicUrl = BASE_URL;
+  const fileName = `ai-builders-digest-${dateSlug}.html`;
+  const publicUrl = `${BASE_URL}${ARCHIVE_DIR}/${fileName}`;
 
   const [feedX, feedPodcasts, feedBlogs] = await Promise.all([
     fetchSourceJson("feed-x.json"),
@@ -554,7 +608,10 @@ async function main() {
   const html = renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest });
 
   await fs.mkdir(PUBLIC_DIR, { recursive: true });
+  await fs.mkdir(path.join(PUBLIC_DIR, ARCHIVE_DIR), { recursive: true });
+  await fs.writeFile(path.join(PUBLIC_DIR, ARCHIVE_DIR, fileName), html);
   await fs.writeFile(path.join(PUBLIC_DIR, "index.html"), html);
+  await fs.writeFile(path.join(PUBLIC_DIR, ARCHIVE_DIR, "index.html"), await renderArchiveIndex());
   await fs.writeFile(path.join(PUBLIC_DIR, "newsletter-date.txt"), `${dateSlug}\n`);
 
   if (process.env.SEND_EMAIL !== "false") {
