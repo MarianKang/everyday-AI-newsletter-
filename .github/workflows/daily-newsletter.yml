@@ -27,6 +27,17 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Check today's newsletter state
+        id: today
+        run: |
+          file="ai-builders-digest-$(TZ=Asia/Shanghai date +%F).html"
+          echo "file=$file" >> "$GITHUB_OUTPUT"
+          if [ -f "$file" ]; then
+            echo "already_published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "already_published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Generate newsletter
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -51,7 +62,7 @@ jobs:
           fi
 
       - name: Send public link by email
-        if: steps.publish.outputs.published == 'true' || github.event_name == 'workflow_dispatch'
+        if: steps.today.outputs.already_published != 'true' || github.event_name == 'workflow_dispatch'
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
