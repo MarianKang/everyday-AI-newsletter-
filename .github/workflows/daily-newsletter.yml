@@ -31,8 +31,20 @@ jobs:
         with:
           node-version: "22"
 
+      - name: Check scheduled send window
+        id: send_window
+        run: |
+          hhmm="$(TZ=Asia/Shanghai date +%H%M)"
+          echo "hhmm=$hhmm" >> "$GITHUB_OUTPUT"
+          if [ "${{ github.event_name }}" != "schedule" ] || { [ "$hhmm" -ge 1310 ] && [ "$hhmm" -le 1359 ]; }; then
+            echo "allowed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "allowed=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Check today's newsletter state
         id: today
+        if: steps.send_window.outputs.allowed == 'true'
         run: |
           date="$(TZ=Asia/Shanghai date +%F)"
           echo "date=$date" >> "$GITHUB_OUTPUT"
@@ -43,7 +55,9 @@ jobs:
           fi
 
       - name: Generate newsletter
+        if: steps.send_window.outputs.allowed == 'true'
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           SEND_EMAIL: "false"
@@ -51,6 +65,7 @@ jobs:
 
       - name: Commit generated newsletter
         id: publish
+        if: steps.send_window.outputs.allowed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -67,8 +82,9 @@ jobs:
           fi
 
       - name: Send public link by email
-        if: github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && steps.today.outputs.already_published != 'true')
+        if: steps.send_window.outputs.allowed == 'true' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && steps.today.outputs.already_published != 'true'))
         env:
+          GITHUB_TOKEN: ${{ github.token }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: node scripts/cloud-daily-newsletter.mjs

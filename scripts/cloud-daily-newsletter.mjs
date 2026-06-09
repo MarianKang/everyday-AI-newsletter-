@@ -91,6 +91,21 @@ function shanghaiWindow(now = new Date()) {
   return { start, end };
 }
 
+function sourceFeedWindow(feeds, fallbackWindow) {
+  const generatedTimes = feeds
+    .map((feed) => feed?.generatedAt)
+    .filter(Boolean)
+    .map((value) => new Date(value))
+    .filter((date) => !Number.isNaN(date.getTime()));
+
+  if (!generatedTimes.length) return fallbackWindow;
+
+  const end = new Date(Math.max(...generatedTimes.map((date) => date.getTime())));
+  const start = new Date(end);
+  start.setUTCHours(start.getUTCHours() - 24);
+  return { start, end };
+}
+
 function formatDateTime(value) {
   if (!value) return "";
   return new Intl.DateTimeFormat("zh-CN", {
@@ -237,15 +252,35 @@ function inWindow(value, window) {
 
 async function fetchGithubText(filePath) {
   const url = `${SOURCE_RAW}/${filePath}`;
-  const response = await fetch(url, {
-    headers: { "User-Agent": "ai-builders-newsletter-cloud" },
-  });
-
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${filePath}: ${response.status} ${response.statusText}`);
+  let response;
+  try {
+    response = await fetch(url, {
+      headers: { "User-Agent": "ai-builders-newsletter-cloud" },
+    });
+  } catch (error) {
+    response = null;
   }
 
-  return response.text();
+  if (response?.ok) return response.text();
+
+  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
+  if (token) {
+    const apiResponse = await fetch(`https://api.github.com/repos/${SOURCE_REPO}/contents/${filePath}?ref=${SOURCE_BRANCH}`, {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${token}`,
+        "User-Agent": "ai-builders-newsletter-cloud",
+        "X-GitHub-Api-Version": "2022-11-28",
+      },
+    });
+    const body = await apiResponse.json().catch(() => ({}));
+    if (apiResponse.ok && body.content) {
+      return Buffer.from(body.content, "base64").toString("utf8");
+    }
+  }
+
+  if (!response) throw new Error(`Failed to fetch ${filePath}`);
+  throw new Error(`Failed to fetch ${filePath}: ${response.status} ${response.statusText}`);
 }
 
 async function fetchSourceJson(filePath) {
@@ -449,7 +484,7 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest
 <body>
   <main>
     <header>
-      <p class="meta">发送窗口：${escapeHtml(formatDateTime(window.start))} 至 ${escapeHtml(formatDateTime(window.end))}，Asia/Shanghai</p>
+      <p class="meta">信息窗口：${escapeHtml(formatDateTime(window.start))} 至 ${escapeHtml(formatDateTime(window.end))}，Asia/Shanghai</p>
       <h1>${escapeHtml(title)}</h1>
       <p class="lede">${escapeHtml(lede)}</p>
       <div class="note">本页由 GitHub Actions 云端生成和发布，不依赖你的 Mac 是否开机或联网。</div>
@@ -586,8 +621,8 @@ ${items}
 
 async function main() {
   const now = new Date();
-  const window = shanghaiWindow(now);
-  const date = window.end;
+  const sendWindow = shanghaiWindow(now);
+  const date = sendWindow.end;
   const dateSlug = ymd(date);
   const fileName = `ai-builders-digest-${dateSlug}.html`;
   const publicUrl = `${BASE_URL}${ARCHIVE_DIR}/${fileName}`;
@@ -598,6 +633,7 @@ async function main() {
     fetchSourceJson("feed-blogs.json"),
   ]);
 
+  const window = sourceFeedWindow([feedX, feedPodcasts, feedBlogs], sendWindow);
   const { xItems, podcastItems, blogItems } = collectItems(feedX, feedPodcasts, feedBlogs, window);
   let modelDigest = null;
   try {
