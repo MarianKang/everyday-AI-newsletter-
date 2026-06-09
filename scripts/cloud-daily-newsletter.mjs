@@ -9,6 +9,7 @@ const SOURCE_BRANCH = "main";
 const SOURCE_RAW = `https://raw.githubusercontent.com/${SOURCE_REPO}/${SOURCE_BRANCH}`;
 const PUBLIC_DIR = ".";
 const ARCHIVE_DIR = "archive";
+const STATE_FILE = "newsletter-state.json";
 const TIME_ZONE = "Asia/Shanghai";
 const RECIPIENT = "kt951218@163.com";
 const DEEPSEEK_MODEL = process.env.DEEPSEEK_MODEL || "deepseek-chat";
@@ -88,21 +89,6 @@ function shanghaiWindow(now = new Date()) {
   if (now < end) end.setUTCDate(end.getUTCDate() - 1);
   const start = new Date(end);
   start.setUTCDate(start.getUTCDate() - 1);
-  return { start, end };
-}
-
-function sourceFeedWindow(feeds, fallbackWindow) {
-  const generatedTimes = feeds
-    .map((feed) => feed?.generatedAt)
-    .filter(Boolean)
-    .map((value) => new Date(value))
-    .filter((date) => !Number.isNaN(date.getTime()));
-
-  if (!generatedTimes.length) return fallbackWindow;
-
-  const end = new Date(Math.max(...generatedTimes.map((date) => date.getTime())));
-  const start = new Date(end);
-  start.setUTCHours(start.getUTCHours() - 24);
   return { start, end };
 }
 
@@ -250,6 +236,35 @@ function inWindow(value, window) {
   return date >= window.start && date < window.end;
 }
 
+function itemKey(item) {
+  return `${item.type}:${item.url || item.id || `${item.sourceName}:${item.date}:${item.title}`}`;
+}
+
+async function loadNewsletterState(startedAt) {
+  try {
+    const text = await fs.readFile(path.join(PUBLIC_DIR, STATE_FILE), "utf8");
+    const state = JSON.parse(text);
+    return {
+      startedAt: state.startedAt || startedAt.toISOString(),
+      lastCutoff: state.lastCutoff || null,
+      lastRunAt: state.lastRunAt || null,
+      seenItemIds: Array.isArray(state.seenItemIds) ? state.seenItemIds : [],
+    };
+  } catch (error) {
+    if (error.code !== "ENOENT") throw error;
+    return {
+      startedAt: startedAt.toISOString(),
+      lastCutoff: null,
+      lastRunAt: null,
+      seenItemIds: [],
+    };
+  }
+}
+
+async function saveNewsletterState(state) {
+  await fs.writeFile(path.join(PUBLIC_DIR, STATE_FILE), `${JSON.stringify(state, null, 2)}\n`);
+}
+
 async function fetchGithubText(filePath) {
   const url = `${SOURCE_RAW}/${filePath}`;
   let response;
@@ -287,34 +302,43 @@ async function fetchSourceJson(filePath) {
   return JSON.parse(await fetchGithubText(filePath));
 }
 
-function collectItems(feedX, feedPodcasts, feedBlogs, window) {
+function collectItems(feedX, feedPodcasts, feedBlogs, { state, cutoff }) {
+  const startedAt = new Date(state.startedAt);
+  const seenItemIds = new Set(state.seenItemIds);
+  const shouldInclude = (item) => {
+    const date = new Date(item.date);
+    if (Number.isNaN(date.getTime())) return false;
+    return date >= startedAt && date < cutoff && !seenItemIds.has(itemKey(item));
+  };
+
   const xItems = (feedX.x || []).flatMap((builder) =>
     (builder.tweets || [])
-      .filter((tweet) => inWindow(tweet.createdAt, window))
       .map((tweet) => ({
         type: "x",
+        id: tweet.id,
         sourceName: builder.name,
         handle: builder.handle,
         title: `${builder.name} 的 X 更新`,
         text: tweet.text,
         url: tweet.url,
         date: tweet.createdAt,
-      })),
+      }))
+      .filter(shouldInclude),
   );
 
   const podcastItems = (feedPodcasts.podcasts || [])
-    .filter((episode) => inWindow(episode.publishedAt, window))
     .map((episode) => ({
       type: "podcast",
+      id: episode.guid,
       sourceName: episode.name,
       title: episode.title,
       text: episode.transcript || episode.summary || "",
       url: episode.url,
       date: episode.publishedAt,
-    }));
+    }))
+    .filter(shouldInclude);
 
   const blogItems = (feedBlogs.blogs || [])
-    .filter((post) => inWindow(post.publishedAt || post.date, window))
     .map((post) => ({
       type: "blog",
       sourceName: post.source || post.name || "Blog",
@@ -322,7 +346,8 @@ function collectItems(feedX, feedPodcasts, feedBlogs, window) {
       text: post.summary || post.text || post.content || "",
       url: post.url,
       date: post.publishedAt || post.date,
-    }));
+    }))
+    .filter(shouldInclude);
 
   return {
     xItems: xItems.sort((a, b) => new Date(b.date) - new Date(a.date)),
@@ -484,7 +509,7 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest
 <body>
   <main>
     <header>
-      <p class="meta">信息窗口：${escapeHtml(formatDateTime(window.start))} 至 ${escapeHtml(formatDateTime(window.end))}，Asia/Shanghai</p>
+      <p class="meta">本次推送截止：${escapeHtml(formatDateTime(window.end))}，Asia/Shanghai；收录当前 feed 中此前未推送过、且不晚于该时点的信息。</p>
       <h1>${escapeHtml(title)}</h1>
       <p class="lede">${escapeHtml(lede)}</p>
       <div class="note">本页由 GitHub Actions 云端生成和发布，不依赖你的 Mac 是否开机或联网。</div>
@@ -633,15 +658,29 @@ async function main() {
     fetchSourceJson("feed-blogs.json"),
   ]);
 
-  const window = sourceFeedWindow([feedX, feedPodcasts, feedBlogs], sendWindow);
-  const { xItems, podcastItems, blogItems } = collectItems(feedX, feedPodcasts, feedBlogs, window);
+  const initialStartedAt = new Date(sendWindow.start);
+  initialStartedAt.setUTCDate(initialStartedAt.getUTCDate() - 1);
+  const state = await loadNewsletterState(initialStartedAt);
+  const { xItems, podcastItems, blogItems } = collectItems(feedX, feedPodcasts, feedBlogs, {
+    state,
+    cutoff: sendWindow.end,
+  });
   let modelDigest = null;
   try {
-    modelDigest = await generateModelDigest({ window, xItems, podcastItems, blogItems });
+    modelDigest = await generateModelDigest({ window: sendWindow, xItems, podcastItems, blogItems });
   } catch (error) {
     console.warn(`DeepSeek digest generation failed, falling back to rules: ${error.message}`);
   }
-  const html = renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest });
+  const html = renderHtml({ date, window: sendWindow, xItems, podcastItems, blogItems, modelDigest });
+
+  const seenItemIds = new Set(state.seenItemIds);
+  for (const item of [...xItems, ...podcastItems, ...blogItems]) seenItemIds.add(itemKey(item));
+  const nextState = {
+    startedAt: state.startedAt,
+    lastCutoff: sendWindow.end.toISOString(),
+    lastRunAt: now.toISOString(),
+    seenItemIds: [...seenItemIds].sort(),
+  };
 
   await fs.mkdir(PUBLIC_DIR, { recursive: true });
   await fs.mkdir(path.join(PUBLIC_DIR, ARCHIVE_DIR), { recursive: true });
@@ -649,6 +688,7 @@ async function main() {
   await fs.writeFile(path.join(PUBLIC_DIR, "index.html"), html);
   await fs.writeFile(path.join(PUBLIC_DIR, ARCHIVE_DIR, "index.html"), await renderArchiveIndex());
   await fs.writeFile(path.join(PUBLIC_DIR, "newsletter-date.txt"), `${dateSlug}\n`);
+  await saveNewsletterState(nextState);
 
   if (process.env.SEND_EMAIL !== "false") {
     await sendEmail({ title: `Everyday AI Newsletter｜${ymd(date)}`, url: publicUrl });
