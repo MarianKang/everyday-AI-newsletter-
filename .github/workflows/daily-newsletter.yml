@@ -38,7 +38,7 @@ jobs:
           echo "hhmm=$hhmm" >> "$GITHUB_OUTPUT"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "allowed=true" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event_name }}" = "schedule" ] && [ "$hhmm" -ge 1310 ] && [ "$hhmm" -le 1359 ]; then
+          elif [ "${{ github.event_name }}" = "schedule" ]; then
             echo "allowed=true" >> "$GITHUB_OUTPUT"
           else
             echo "allowed=false" >> "$GITHUB_OUTPUT"
