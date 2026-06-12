@@ -663,7 +663,7 @@ async function main() {
   const state = await loadNewsletterState(initialStartedAt);
   const { xItems, podcastItems, blogItems } = collectItems(feedX, feedPodcasts, feedBlogs, {
     state,
-    cutoff: sendWindow.end,
+    cutoff: now,
   });
   let modelDigest = null;
   try {
@@ -677,7 +677,7 @@ async function main() {
   for (const item of [...xItems, ...podcastItems, ...blogItems]) seenItemIds.add(itemKey(item));
   const nextState = {
     startedAt: state.startedAt,
-    lastCutoff: sendWindow.end.toISOString(),
+    lastCutoff: now.toISOString(),
     lastRunAt: now.toISOString(),
     seenItemIds: [...seenItemIds].sort(),
   };
