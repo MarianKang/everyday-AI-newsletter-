@@ -29,9 +29,9 @@ const TOPICS = [
   },
   {
     label: "内容形态与创作者互动",
-    keywords: ["static content", "live interaction", "conference", "research paper", "publishing", "human being", "raw", "opinionated"],
-    title: "静态内容的价值被重新估价，实时互动和个人观点更受重视",
-    why: "这条线索和产品有关：内容、软件、会议和社区都在从“发布一个成品”转向“让用户接触到背后的人和判断”。这会影响知识产品、开发者社区、会议和创作者工具的形态。",
+    keywords: ["static content", "live interaction", "conference", "research paper", "publishing", "human being", "raw", "opinionated", "taste", "mastery", "preference"],
+    title: "内容和产品判断里，taste 正在变成一种需要训练的能力",
+    why: "这条线索和产品有关：当 AI 让生成变便宜，真正稀缺的可能变成判断力、品味和选择能力。内容、软件、会议和社区都会更依赖背后的人如何筛选、组织和表达。",
   },
   {
     label: "创业、世界模型与生态关系",
@@ -59,6 +59,8 @@ const MANUAL_SUMMARIES = {
   "2063300737296400516": "Amjad Masad 提到 Vibecon，像是围绕 vibe coding 或建设者社区的活动动态。",
   "2063280482922663980": "Garry Tan 谈到地方治理，认为 Oakland 的管理问题可以修复，但还缺少类似旧金山那样的常识回归。这条偏公共事务，和 AI 产品关联较弱。",
   "2063263389238087745": "Nikunj Kothari 发布了一期访谈目录，主题包括世界模型、从文本到三维的创业起点、为什么创办公司、游戏和编程经历、低延迟的重要性、成为 CEO 和扩展团队等。",
+  "2066036778713362747": "Zara Zhang 推荐了一篇关于 taste 如何培养的文章。她摘出的重点是：品味不只是个人偏好，好的品味需要掌握能力和长期经验。这条更偏产品判断和创作者判断力，而不是单纯信息更新。",
+  "2066034464120345075": "Peter Yang 发了一条非常短的 YOLO 动态并附了链接，原文信息量较低，先作为窗口内补充更新保留。",
 };
 
 function shanghaiParts(date) {
