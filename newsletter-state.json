@@ -1,7 +1,7 @@
 {
   "startedAt": "2026-06-07T05:10:00.000Z",
-  "lastCutoff": "2026-06-14T05:10:00.000Z",
-  "lastRunAt": "2026-06-14T12:27:43.218Z",
+  "lastCutoff": "2026-06-15T05:10:00.000Z",
+  "lastRunAt": "2026-06-15T08:06:04.641Z",
   "seenItemIds": [
     "podcast:https://www.youtube.com/@NoPriorsPodcast",
     "podcast:https://www.youtube.com/watch?v=W_iO8XxgD_I",
@@ -93,6 +93,7 @@
     "x:https://x.com/petergyang/status/2065622592309039449",
     "x:https://x.com/petergyang/status/2065841885936316797",
     "x:https://x.com/petergyang/status/2065973599119536181",
+    "x:https://x.com/petergyang/status/2066034464120345075",
     "x:https://x.com/rauchg/status/2063714700618334260",
     "x:https://x.com/rauchg/status/2064732935484514729",
     "x:https://x.com/rauchg/status/2064777495422161205",
@@ -141,6 +142,7 @@
     "x:https://x.com/zarazhangrui/status/2064825302359150870",
     "x:https://x.com/zarazhangrui/status/2064835289559023958",
     "x:https://x.com/zarazhangrui/status/2064843560248332577",
-    "x:https://x.com/zarazhangrui/status/2065140462709506108"
+    "x:https://x.com/zarazhangrui/status/2065140462709506108",
+    "x:https://x.com/zarazhangrui/status/2066036778713362747"
   ]
 }
