@@ -167,13 +167,38 @@ function extractJson(text) {
   }
 }
 
-function validateModelDigest(value) {
+function themeMatchesSourceText(theme, items) {
+  const heading = `${theme.label || ""} ${theme.title || ""}`;
+  const sourceText = items.map((item) => `${item.title || ""} ${item.text || ""}`).join(" ").toLowerCase();
+  if (/智能体|开发|工作流|编程|代码/.test(heading)) {
+    return /agent|codex|coding|workflow|developer|智能体|编程|代码|工作流/.test(sourceText);
+  }
+  if (/模型|路由|成本|词元|评测/.test(heading)) {
+    return /model|routing|route|token|cost|eval|模型|路由|成本|词元|评测/.test(sourceText);
+  }
+  return true;
+}
+
+function validateModelDigest(value, compactItems = []) {
   if (!value || typeof value !== "object") throw new Error("DeepSeek digest JSON is not an object.");
   if (typeof value.lede !== "string") throw new Error("DeepSeek digest JSON missing lede.");
   if (!Array.isArray(value.themes)) throw new Error("DeepSeek digest JSON missing themes.");
   if (!Array.isArray(value.itemSummaries)) throw new Error("DeepSeek digest JSON missing itemSummaries.");
   if (!Array.isArray(value.productSignals)) value.productSignals = [];
   if (!Array.isArray(value.watchQuestions)) value.watchQuestions = [];
+  const itemsById = new Map(compactItems.map((item) => [item.id, item]));
+  const usedIds = new Set();
+  value.themes = value.themes
+    .map((theme) => {
+      const sourceIds = [...new Set(theme?.sourceIds || [])]
+        .filter((id) => itemsById.has(id) && !usedIds.has(id));
+      const sourceItems = sourceIds.map((id) => itemsById.get(id));
+      if (!sourceIds.length || !themeMatchesSourceText(theme, sourceItems)) return null;
+      for (const id of sourceIds) usedIds.add(id);
+      return { ...theme, sourceIds };
+    })
+    .filter(Boolean)
+    .slice(0, 6);
   return value;
 }
 
@@ -181,8 +206,11 @@ async function generateModelDigest({ window, xItems, podcastItems, blogItems }) 
   const apiKey = process.env.DEEPSEEK_API_KEY;
   if (!apiKey) return null;
 
-  const sourceItems = [...xItems, ...podcastItems, ...blogItems];
-  const compactItems = sourceItems.map(compactItem);
+  const compactItems = [
+    ...xItems.map(compactItem),
+    ...podcastItems.map(compactItem),
+    ...blogItems.map(compactItem),
+  ];
   const prompt = {
     window: `${formatDateTime(window.start)} 至 ${formatDateTime(window.end)} Asia/Shanghai`,
     requirements: [
@@ -191,6 +219,9 @@ async function generateModelDigest({ window, xItems, podcastItems, blogItems }) 
       "标题不需要生成，标题固定由系统使用 Everyday AI Newsletter｜YYYY-MM-DD。",
       "lede 是标题下方的本期整体概览，不要只是统计数量，要概括本期整体形状。",
       "themes 是“今天发生了什么”，必须跨 X、播客、博客综合共同主题、变化方向、产品/agent/创业相关类别，不要按信息源类型分类。",
+      "themes 之间必须互斥：同一个 item 的 id 只能出现在一个 theme.sourceIds 里；不要把同一批来源重复归入多个主题。",
+      "每个 theme 的 label、title、summary 必须和 sourceIds 对应的来源内容严格一致。不要出现“智能体与开发工作流”标题却讲模型路由/成本，也不要出现“模型路由与成本效率”标题却讲开发工作流。",
+      "如果来源内容只支持一个主题，就只写一个 theme；宁可少写，也不要为了凑类别而重复或错配。",
       "每个 theme 必须包含 label、title、summary、why、sourceIds。sourceIds 使用输入 item 的 id。",
       "itemSummaries 必须覆盖每一个输入 item，给出中文 summary，不能省略。",
       "productSignals 是产品与观点线索，watchQuestions 是可继续观察的问题。",
@@ -227,7 +258,7 @@ async function generateModelDigest({ window, xItems, podcastItems, blogItems }) 
     throw new Error(`DeepSeek API error: ${body.error?.message || body.message || response.status}`);
   }
 
-  return validateModelDigest(extractJson(body.choices?.[0]?.message?.content));
+  return validateModelDigest(extractJson(body.choices?.[0]?.message?.content), compactItems);
 }
 
 function inWindow(value, window) {
@@ -476,7 +507,7 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(title)}</title>
   <style>
-    :root { color-scheme: light; --bg:#f6f7f4; --paper:#fff; --ink:#1f2933; --muted:#667085; --line:#d9ded6; --accent:#1769aa; --soft:#eef4f7; --note:#f7f1df; --green:#2f6f4e; }
+    :root { color-scheme: light; --bg:#f6f7f4; --paper:#fff; --ink:#1f2933; --muted:#667085; --line:#d9ded6; --accent:#1769aa; --soft:#eef4f7; --green:#2f6f4e; }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
     main { width: min(900px, calc(100% - 28px)); margin: 0 auto; padding: 30px 0 48px; }
@@ -488,7 +519,6 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest
     a { color: var(--accent); text-underline-offset: 3px; }
     .meta { color: var(--muted); font-size: 14px; }
     .lede { max-width: 760px; font-size: 18px; }
-    .note { margin-top: 18px; padding: 14px 16px; border: 1px solid #e5d7aa; border-radius: 8px; background: var(--note); color: #5b4b1f; }
     .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .toc a { display: inline-block; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font-size: 14px; text-decoration: none; }
     .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
@@ -512,7 +542,6 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest
       <p class="meta">本次推送截止：${escapeHtml(formatDateTime(window.end))}，Asia/Shanghai；收录当前 feed 中此前未推送过、且不晚于该时点的信息。</p>
       <h1>${escapeHtml(title)}</h1>
       <p class="lede">${escapeHtml(lede)}</p>
-      <div class="note">本页由 GitHub Actions 云端生成和发布，不依赖你的 Mac 是否开机或联网。</div>
       <nav class="toc" aria-label="日报目录">
         <a href="#what-happened">今天发生了什么</a>
         <a href="#source-overview">信息源更新概览</a>
