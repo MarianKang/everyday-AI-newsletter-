@@ -86,9 +86,7 @@ function md(date) {
 }
 
 function shanghaiWindow(now = new Date()) {
-  const p = shanghaiParts(now);
-  const end = new Date(`${p.year}-${p.month}-${p.day}T05:10:00.000Z`);
-  if (now < end) end.setUTCDate(end.getUTCDate() - 1);
+  const end = new Date(now);
   const start = new Date(end);
   start.setUTCDate(start.getUTCDate() - 1);
   return { start, end };
@@ -541,7 +539,7 @@ function renderHtml({ date, window, xItems, podcastItems, blogItems, modelDigest
 <body>
   <main>
     <header>
-      <p class="meta">本次推送截止：${escapeHtml(formatDateTime(window.end))}，Asia/Shanghai；收录当前 feed 中此前未推送过、且不晚于该时点的信息。</p>
+      <p class="meta">本次实际执行：${escapeHtml(formatDateTime(window.end))}，Asia/Shanghai；收录当前 feed 中此前未推送过、且不晚于该时点的信息。</p>
       <h1>${escapeHtml(title)}</h1>
       <p class="lede">${escapeHtml(lede)}</p>
       <nav class="toc" aria-label="日报目录">
@@ -690,7 +688,6 @@ async function main() {
   ]);
 
   const initialStartedAt = new Date(sendWindow.start);
-  initialStartedAt.setUTCDate(initialStartedAt.getUTCDate() - 1);
   const state = await loadNewsletterState(initialStartedAt);
   const { xItems, podcastItems, blogItems } = collectItems(feedX, feedPodcasts, feedBlogs, {
     state,
