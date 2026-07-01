@@ -4,9 +4,12 @@ name: Daily AI Builders Newsletter
 
 on:
   schedule:
-    # GitHub cron uses UTC. These are 13:10 and 13:30 in Asia/Shanghai.
+    # GitHub cron uses UTC. Primary sends are 13:10 and 13:30 in Asia/Shanghai.
     - cron: "10 5 * * *"
     - cron: "30 5 * * *"
+    # Same-day catch-up checks. GitHub scheduled runs can be delayed or dropped;
+    # these prevent missing a day while newsletter-date.txt prevents duplicates.
+    - cron: "0 6-15 * * *"
   workflow_dispatch:
   push:
     paths:
@@ -42,8 +45,8 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "allowed=true" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event_name }}" = "schedule" ] \
-            && { [ "$schedule" = "10 5 * * *" ] || [ "$schedule" = "30 5 * * *" ]; } \
-            && [ "$hhmm" -ge 1310 ] && [ "$hhmm" -le 1359 ]; then
+            && { [ "$schedule" = "10 5 * * *" ] || [ "$schedule" = "30 5 * * *" ] || [ "$schedule" = "0 6-15 * * *" ]; } \
+            && [ "$hhmm" -ge 1310 ]; then
             echo "allowed=true" >> "$GITHUB_OUTPUT"
           else
             echo "allowed=false" >> "$GITHUB_OUTPUT"
@@ -89,7 +92,7 @@ jobs:
           fi
 
       - name: Send public link by email
-        if: steps.send_window.outputs.allowed == 'true' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && steps.today.outputs.already_published != 'true'))
+        if: steps.publish.outputs.published == 'true'
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
         run: |
