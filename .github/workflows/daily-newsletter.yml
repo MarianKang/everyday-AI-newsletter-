@@ -4,7 +4,9 @@ name: Daily AI Builders Newsletter
 
 on:
   schedule:
-    - cron: "10,30 5 * * *"
+    # GitHub cron uses UTC. These are 13:10 and 13:30 in Asia/Shanghai.
+    - cron: "10 5 * * *"
+    - cron: "30 5 * * *"
   workflow_dispatch:
   push:
     paths:
@@ -34,10 +36,14 @@ jobs:
         id: send_window
         run: |
           hhmm="$(TZ=Asia/Shanghai date +%H%M)"
+          schedule="${{ github.event.schedule }}"
           echo "hhmm=$hhmm" >> "$GITHUB_OUTPUT"
+          echo "schedule=$schedule" >> "$GITHUB_OUTPUT"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "allowed=true" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event_name }}" = "schedule" ] && [ "$hhmm" -ge 1310 ] && [ "$hhmm" -le 1359 ]; then
+          elif [ "${{ github.event_name }}" = "schedule" ] \
+            && { [ "$schedule" = "10 5 * * *" ] || [ "$schedule" = "30 5 * * *" ]; } \
+            && [ "$hhmm" -ge 1310 ] && [ "$hhmm" -le 1359 ]; then
             echo "allowed=true" >> "$GITHUB_OUTPUT"
           else
             echo "allowed=false" >> "$GITHUB_OUTPUT"
@@ -56,7 +62,7 @@ jobs:
           fi
 
       - name: Generate newsletter
-        if: steps.send_window.outputs.allowed == 'true'
+        if: steps.send_window.outputs.allowed == 'true' && (github.event_name == 'workflow_dispatch' || steps.today.outputs.already_published != 'true')
         env:
           GITHUB_TOKEN: ${{ github.token }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -66,7 +72,7 @@ jobs:
 
       - name: Commit generated newsletter
         id: publish
-        if: steps.send_window.outputs.allowed == 'true'
+        if: steps.send_window.outputs.allowed == 'true' && (github.event_name == 'workflow_dispatch' || steps.today.outputs.already_published != 'true')
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
