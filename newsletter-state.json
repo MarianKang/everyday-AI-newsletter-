@@ -1,7 +1,7 @@
 {
   "startedAt": "2026-06-07T05:10:00.000Z",
-  "lastCutoff": "2026-09-06T09:19:09.788Z",
-  "lastRunAt": "2026-09-06T09:19:09.788Z",
+  "lastCutoff": "2026-09-07T10:09:15.777Z",
+  "lastRunAt": "2026-09-07T10:09:15.777Z",
   "seenItemIds": [
     "blog:https://claude.com/blog/artifacts-in-claude-code",
     "blog:https://claude.com/blog/claude-for-foundation-models",
@@ -775,6 +775,7 @@
     "x:https://x.com/levie/status/2095234253613359200",
     "x:https://x.com/levie/status/2095519015771000964",
     "x:https://x.com/levie/status/2095598710311067716",
+    "x:https://x.com/levie/status/2096735726750908464",
     "x:https://x.com/mattturck/status/2064806681612362113",
     "x:https://x.com/mattturck/status/2072088791393669144",
     "x:https://x.com/mattturck/status/2072419592354529712",
@@ -978,6 +979,7 @@
     "x:https://x.com/nikunj/status/2095634707044266049",
     "x:https://x.com/nikunj/status/2095640247392759871",
     "x:https://x.com/nikunj/status/2095890365723406590",
+    "x:https://x.com/nikunj/status/2096798671547646134",
     "x:https://x.com/petergyang/status/2063773025196192188",
     "x:https://x.com/petergyang/status/2063818032280170721",
     "x:https://x.com/petergyang/status/2063819323106615434",
@@ -1170,6 +1172,7 @@
     "x:https://x.com/petergyang/status/2096020213775118765",
     "x:https://x.com/petergyang/status/2096036429159973348",
     "x:https://x.com/petergyang/status/2096086845159563476",
+    "x:https://x.com/petergyang/status/2096815819997204639",
     "x:https://x.com/rauchg/status/2063714700618334260",
     "x:https://x.com/rauchg/status/2064732935484514729",
     "x:https://x.com/rauchg/status/2064777495422161205",
@@ -1789,6 +1792,7 @@
     "x:https://x.com/thenanyu/status/2094928207179067682",
     "x:https://x.com/thenanyu/status/2094928209095872530",
     "x:https://x.com/thenanyu/status/2095580048116080746",
+    "x:https://x.com/thenanyu/status/2096796392102752507",
     "x:https://x.com/thsottiaux/status/2063748242681307611",
     "x:https://x.com/thsottiaux/status/2064869401359417799",
     "x:https://x.com/thsottiaux/status/2064900105032135010",
@@ -2113,6 +2117,7 @@
     "x:https://x.com/zarazhangrui/status/2095375073381318656",
     "x:https://x.com/zarazhangrui/status/2095416650401186288",
     "x:https://x.com/zarazhangrui/status/2095738566504800496",
-    "x:https://x.com/zarazhangrui/status/2096082116828406233"
+    "x:https://x.com/zarazhangrui/status/2096082116828406233",
+    "x:https://x.com/zarazhangrui/status/2096824861108928701"
   ]
 }
