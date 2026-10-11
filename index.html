@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Everyday AI Newsletter｜2026-10-10</title>
+  <title>Everyday AI Newsletter｜2026-10-11</title>
   <style>
     :root { color-scheme: light; --bg:#f6f7f4; --paper:#fff; --ink:#1f2933; --muted:#667085; --line:#d9ded6; --accent:#1769aa; --soft:#eef4f7; --green:#2f6f4e; }
     * { box-sizing: border-box; }
@@ -37,9 +37,9 @@
 <body>
   <main>
     <header>
-      <p class="meta">本次实际执行：10/10 19:06，Asia/Shanghai；收录当前 feed 中此前未推送过、且不晚于该时点的信息。</p>
-      <h1>Everyday AI Newsletter｜2026-10-10</h1>
-      <p class="lede">本期整体看，更新主要集中在模型路由与成本效率、智能体与开发工作流、创业、世界模型与生态关系。比较值得留意的是：开发工具正在从“能生成”进入“能管理复杂任务”的阶段，模型路由和成本效率开始成为应用层产品能力，而内容与创业生态里的信号也在提醒我们，AI 产品不只是技术性能，还包括人、组织和分发方式。</p>
+      <p class="meta">本次实际执行：10/11 19:21，Asia/Shanghai；收录当前 feed 中此前未推送过、且不晚于该时点的信息。</p>
+      <h1>Everyday AI Newsletter｜2026-10-11</h1>
+      <p class="lede">本期信息源集中在 X 平台，围绕智能体规模化、企业级安全治理、工程与产品协作方式的变化展开。多位从业者讨论智能体集群如何并行处理大规模任务、企业如何为智能体建立身份与权限体系，以及工程师与产品经理在智能体加持下的新协作比例。同时，关于大语言模型词元消耗方向、评测与检索延迟优化、以及创业融资中信任与契约的讨论也穿插其中，整体呈现出从能力验证向信任、治理与工作流重构过渡的态势。</p>
       <nav class="toc" aria-label="日报目录">
         <a href="#what-happened">今天发生了什么</a>
         <a href="#source-overview">信息源更新概览</a>
@@ -47,7 +47,7 @@
         <a href="#watch-questions">可继续观察的问题</a>
       </nav>
       <div class="grid">
-        <a class="metric" href="#x-updates"><strong>27</strong><span class="meta">X 更新的信息</span></a>
+        <a class="metric" href="#x-updates"><strong>21</strong><span class="meta">X 更新的信息</span></a>
         <a class="metric" href="#podcasts"><strong>0</strong><span class="meta">播客</span></a>
         <a class="metric" href="#blogs"><strong>0</strong><span class="meta">博客</span></a>
       </div>
@@ -57,35 +57,35 @@
       <h2>今天发生了什么</h2>
       
       <div class="block">
-        <span class="label">模型路由与成本效率</span>
-        <h3>模型路由正在从工程细节变成应用层产品能力</h3>
-        <p>Aaron Levie 讨论了模型选择、成本或任务路由问题，重点是如何在质量、速度和价格之间做取舍。 / Madhu Guru 讨论了模型选择、成本或任务路由问题，重点是如何在质量、速度和价格之间做取舍。</p>
-        <p>为什么可能重要：当企业真正开始大规模使用大语言模型，成本和质量的取舍就会变成产品问题。谁能知道某个任务该用强模型、便宜模型还是开源模型，谁就能在效果和成本之间做出更好的产品设计。</p>
-        <p class="meta">信息来源：<a href="#x-8">Aaron Levie</a>，<a href="#x-20">Madhu Guru</a></p>
+        <span class="label">智能体规模化与企业安全治理</span>
+        <h3>智能体集群扩张，安全与治理成为下一阶段焦点</h3>
+        <p>Aaron Levie 认为未来大量词元将被智能体集群消耗，智能体可在软件开发、网络安全、生命科学研究、金融等领域并行推进统一目标，突破人类在沟通、状态同步和冲突处理上的限制。Madhu Guru 提出智能体能力将快速演进，智能体安全（身份、权限、可观测性）需要更快跟上，行业正从能力阶段转向信任阶段，再走向自主。Aaron Levie 还指出，随着智能体在企业中执行的任务远超人类，安全、治理、控制和审计将变得至关重要，需要像对待内部风险一样对待前沿闭源和开源权重模型。</p>
+        <p>为什么可能重要：这组讨论指向智能体从单点能力展示转向大规模部署后的核心瓶颈：权限、审计、责任归属和风险控制。对企业采购和产品设计而言，安全与治理能力可能成为智能体平台的关键差异化。</p>
+        <p class="meta">信息来源：<a href="#x-6">Aaron Levie</a>，<a href="#x-13">Madhu Guru</a>，<a href="#x-18">Aaron Levie</a></p>
       </div>
 
       <div class="block">
-        <span class="label">智能体与开发工作流</span>
-        <h3>智能体编码和开发工作流继续变得更上头，也更需要管理界面</h3>
-        <p>Guillermo Rauch 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。 / Thariq 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。 / Nan Yu 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。</p>
-        <p>为什么可能重要：这类更新说明，开发者不是只在尝鲜，而是在真的把智能体放进日常工作。新的问题随之出现：线程怎么管理、任务怎么筛选、本地与云端边界怎么解释、哪些步骤该交给模型。产品机会会从“能不能生成代码”转向“能不能把复杂工作流管顺”。</p>
-        <p class="meta">信息来源：<a href="#x-9">Guillermo Rauch</a>，<a href="#x-12">Thariq</a>，<a href="#x-15">Nan Yu</a>，<a href="#x-16">Guillermo Rauch</a>，<a href="#x-23">Dan Shipper</a>，<a href="#x-26">Swyx</a></p>
+        <span class="label">工程与产品协作方式重构</span>
+        <h3>智能体让工程师更强，产品经理带宽成为新瓶颈</h3>
+        <p>Nan Yu 观察到智能体让工程师变得极其强大，但产品经理仍受限于与客户沟通的带宽，因此理想比例可能是 1:1。Garry Tan 分享了自己的工作流：使用 GStack /autoplan 让智能体解释计划，仍会审批计划以确保方向正确，但很少需要干预，并提到一个线程可协调合并请求队列、确保 CI 通过且只有全绿才进入主分支。他还建议对检索和延迟类任务设置清晰的评测，围绕检索、延迟和每计算成本进行优化。</p>
+        <p>为什么可能重要：这组内容反映了智能体正在改变工程与产品的分工边界：工程师产出放大后，需求侧和决策侧的瓶颈更加突出，同时评测与自动化流水线成为日常实践的一部分。</p>
+        <p class="meta">信息来源：<a href="#x-14">Nan Yu</a>，<a href="#x-15">Garry Tan</a>，<a href="#x-16">Garry Tan</a>，<a href="#x-17">Garry Tan</a></p>
       </div>
 
       <div class="block">
-        <span class="label">创业、世界模型与生态关系</span>
-        <h3>创业生态里既有世界模型的新公司故事，也有资本与价值观的摩擦</h3>
-        <p>Swyx 更新了创业或团队建设相关内容，可能和 AI 创业生态的节奏、融资和组织判断有关。 / Peter Yang 更新了创业或团队建设相关内容，可能和 AI 创业生态的节奏、融资和组织判断有关。 / Nikunj Kothari 更新了创业或团队建设相关内容，可能和 AI 创业生态的节奏、融资和组织判断有关。</p>
-        <p>为什么可能重要：这些内容不是纯产品发布，但会影响创业者如何选择方向、投资人和团队。尤其是世界模型、低延迟、游戏与三维生成这些关键词，可能会成为下一批空间智能产品的基础。</p>
-        <p class="meta">信息来源：<a href="#x-2">Swyx</a>，<a href="#x-13">Peter Yang</a>，<a href="#x-21">Nikunj Kothari</a>，<a href="#x-27">Matt Turck</a></p>
+        <span class="label">创业融资中的信任与契约</span>
+        <h3>风险投资需要以契约和信任赢得每一轮席位</h3>
+        <p>Nikunj Kothari 评论近期风险投资争议，认为从哲学上讲不能既要求基金展示信念、又在困难时要求加倍下注，同时要求他们不要因为便利而做合约式按比例跟投。他认为每家风投都应在每个阶段赢得进入股权结构的权利，但行业依赖合同和握手，为短期利益破坏这些会侵蚀本已脆弱的信任。他提醒创始人慎重选择合伙人和合同，并建议找独立律师把条款讲清楚，还提到自己前一天帮表弟谈 pre-seed 条款清单，对方想要的条件远超一份简单的 SAFE。</p>
+        <p>为什么可能重要：这条内容提醒创业者在融资中重视合同与信任机制，尤其是在早期条款复杂化时，独立法律意见和伙伴选择可能直接影响公司治理与后续融资。</p>
+        <p class="meta">信息来源：<a href="#x-9">Nikunj Kothari</a></p>
       </div>
 
       <div class="block">
-        <span class="label">其他补充信息</span>
-        <h3>还有一些更新更像补充信息，先保留但不强行解读</h3>
-        <p>Thariq 有一条窗口内更新，原文信息较短，先作为补充动态保留。 / Thibault Sottiaux 有一条窗口内更新，原文信息较短，先作为补充动态保留。 / Thibault Sottiaux 有一条窗口内更新，原文信息较短，先作为补充动态保留。</p>
-        <p>为什么可能重要：不是所有窗口内更新都值得强行归纳成趋势。这里保留低信号或偏题内容，是为了让你知道信息源确实有更新，同时不把它包装成过度结论。</p>
-        <p class="meta">信息来源：<a href="#x-1">Thariq</a>，<a href="#x-3">Thibault Sottiaux</a>，<a href="#x-4">Thibault Sottiaux</a>，<a href="#x-5">Garry Tan</a>，<a href="#x-6">Garry Tan</a>，<a href="#x-7">Garry Tan</a>，<a href="#x-10">Zara Zhang</a>，<a href="#x-11">Nikunj Kothari</a></p>
+        <span class="label">其他零散观察</span>
+        <h3>JavaScript 争议、计划进展与燃料问题</h3>
+        <p>Peter Steinberger 表示“没那么绝对，但也是”，并称 JavaScript 不是一门严肃的语言。Nan Yu 发帖称“一切似乎都在按计划进行”，随后又提到“没油了，加油问题”。Nikunj Kothari 发帖“Let’s go - only took 23 months”。</p>
+        <p>为什么可能重要：这些内容较为零散，主要反映个人观点和日常状态，对产品与创业决策的直接参考价值有限，但可作为社区氛围的补充观察。</p>
+        <p class="meta">信息来源：<a href="#x-7">Nikunj Kothari</a>，<a href="#x-10">Nan Yu</a>，<a href="#x-11">Peter Steinberger</a>，<a href="#x-12">Peter Steinberger</a>，<a href="#x-19">Nan Yu</a></p>
       </div>
     </section>
 
@@ -93,192 +93,150 @@
       <h2>信息源更新概览</h2>
       <div class="source" id="x-updates"><span class="label">X 更新的信息</span>
         <div class="item" id="x-1">
-          <p class="meta">10/10 14:12</p>
-          <h3>Thariq 的 X 更新</h3>
-          <div class="quote">Thariq 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/trq212/status/2108802833986552174" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 13:22</p>
+          <h3>Thibault Sottiaux 的 X 更新</h3>
+          <div class="quote">Thibault Sottiaux 向 Pro 用户提问：你们更想要什么？</div>
+          <p><a href="https://x.com/thsottiaux/status/2109152716954222849" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-2">
-          <p class="meta">10/10 12:45</p>
-          <h3>Swyx 的 X 更新</h3>
-          <div class="quote">Swyx 更新了创业或团队建设相关内容，可能和 AI 创业生态的节奏、融资和组织判断有关。</div>
-          <p><a href="https://x.com/swyx/status/2108780918060036335" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 12:01</p>
+          <h3>Thibault Sottiaux 的 X 更新</h3>
+          <div class="quote">Thibault Sottiaux 表示重置已放入包中并全部传播完成。</div>
+          <p><a href="https://x.com/thsottiaux/status/2109132167112782291" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-3">
-          <p class="meta">10/10 12:33</p>
-          <h3>Thibault Sottiaux 的 X 更新</h3>
-          <div class="quote">Thibault Sottiaux 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/thsottiaux/status/2108777962053292398" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 10:23</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 发帖称“确实出了点问题”。</div>
+          <p><a href="https://x.com/petergyang/status/2109107670229930458" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-4">
-          <p class="meta">10/10 12:16</p>
+          <p class="meta">10/11 09:13</p>
           <h3>Thibault Sottiaux 的 X 更新</h3>
-          <div class="quote">Thibault Sottiaux 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/thsottiaux/status/2108773703064657936" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <div class="quote">Thibault Sottiaux 表示达到完美的那天起，将从此不断重置。</div>
+          <p><a href="https://x.com/thsottiaux/status/2109090080497508356" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-5">
-          <p class="meta">10/10 11:08</p>
-          <h3>Garry Tan 的 X 更新</h3>
-          <div class="quote">Garry Tan 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/garrytan/status/2108756559564242964" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 09:04</p>
+          <h3>Zara Zhang 的 X 更新</h3>
+          <div class="quote">Zara Zhang 认为代码是创意自我表达的新媒介。</div>
+          <p><a href="https://x.com/zarazhangrui/status/2109087739287384387" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-6">
-          <p class="meta">10/10 11:07</p>
-          <h3>Garry Tan 的 X 更新</h3>
-          <div class="quote">Garry Tan 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/garrytan/status/2108756335705907335" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 08:32</p>
+          <h3>Aaron Levie 的 X 更新</h3>
+          <div class="quote">Aaron Levie 认为未来大量词元将被智能体集群消耗，智能体可在软件开发、网络安全、生命科学研究、金融等领域并行推进统一目标，突破人类在沟通、状态同步和冲突处理上的限制。</div>
+          <p><a href="https://x.com/levie/status/2109079686286565378" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-7">
-          <p class="meta">10/10 11:06</p>
-          <h3>Garry Tan 的 X 更新</h3>
-          <div class="quote">Garry Tan 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/garrytan/status/2108756019132379586" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 07:17</p>
+          <h3>Nikunj Kothari 的 X 更新</h3>
+          <div class="quote">Nikunj Kothari 发帖“Let’s go - only took 23 months”。</div>
+          <p><a href="https://x.com/nikunj/status/2109060688446677004" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-8">
-          <p class="meta">10/10 10:46</p>
-          <h3>Aaron Levie 的 X 更新</h3>
-          <div class="quote">Aaron Levie 讨论了模型选择、成本或任务路由问题，重点是如何在质量、速度和价格之间做取舍。</div>
-          <p><a href="https://x.com/levie/status/2108750943680630893" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 05:49</p>
+          <h3>Guillermo Rauch 的 X 更新</h3>
+          <div class="quote">Guillermo Rauch 表示所有看似合理的科幻都将在我们有生之年实现，并称读者是史上最幸运的人类之一。</div>
+          <p><a href="https://x.com/rauchg/status/2109038632518782989" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-9">
-          <p class="meta">10/10 09:35</p>
-          <h3>Guillermo Rauch 的 X 更新</h3>
-          <div class="quote">Guillermo Rauch 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。</div>
-          <p><a href="https://x.com/rauchg/status/2108733051283050964" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 05:49</p>
+          <h3>Nikunj Kothari 的 X 更新</h3>
+          <div class="quote">Nikunj Kothari 评论风险投资争议，认为不能既要求基金展示信念又在困难时要求加倍下注，同时要求不做合约式按比例跟投；每家风投都应在每个阶段赢得股权结构中的位置，破坏合同和握手会侵蚀信任，创始人应慎重选择合伙人和合同并找独立律师。</div>
+          <p><a href="https://x.com/nikunj/status/2109038632975876395" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-10">
-          <p class="meta">10/10 08:10</p>
-          <h3>Zara Zhang 的 X 更新</h3>
-          <div class="quote">Zara Zhang 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/zarazhangrui/status/2108711659846132092" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 05:37</p>
+          <h3>Nan Yu 的 X 更新</h3>
+          <div class="quote">Nan Yu 发帖称“一切似乎都在按计划进行”。</div>
+          <p><a href="https://x.com/thenanyu/status/2109035605061693774" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-11">
-          <p class="meta">10/10 08:03</p>
-          <h3>Nikunj Kothari 的 X 更新</h3>
-          <div class="quote">Nikunj Kothari 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/nikunj/status/2108710061627588964" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 04:45</p>
+          <h3>Peter Steinberger 的 X 更新</h3>
+          <div class="quote">Peter Steinberger 表示“没那么绝对，但也是”。</div>
+          <p><a href="https://x.com/steipete/status/2109022454224150707" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-12">
-          <p class="meta">10/10 06:40</p>
-          <h3>Thariq 的 X 更新</h3>
-          <div class="quote">Thariq 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。</div>
-          <p><a href="https://x.com/trq212/status/2108689101503566319" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 03:49</p>
+          <h3>Peter Steinberger 的 X 更新</h3>
+          <div class="quote">Peter Steinberger 称 JavaScript 不是一门严肃的语言。</div>
+          <p><a href="https://x.com/steipete/status/2109008513855087082" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-13">
-          <p class="meta">10/10 06:02</p>
-          <h3>Peter Yang 的 X 更新</h3>
-          <div class="quote">Peter Yang 更新了创业或团队建设相关内容，可能和 AI 创业生态的节奏、融资和组织判断有关。</div>
-          <p><a href="https://x.com/petergyang/status/2108679515681722787" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 02:07</p>
+          <h3>Madhu Guru 的 X 更新</h3>
+          <div class="quote">Madhu Guru 认为智能体能力将快速演进，智能体安全（身份、权限、可观测性）需要更快跟上，行业正从能力阶段转向信任阶段，再走向自主。</div>
+          <p><a href="https://x.com/realmadhuguru/status/2108982858513776899" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-14">
-          <p class="meta">10/10 05:32</p>
+          <p class="meta">10/11 01:41</p>
           <h3>Nan Yu 的 X 更新</h3>
-          <div class="quote">Nan Yu 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/thenanyu/status/2108671887266246730" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <div class="quote">Nan Yu 观察到智能体让工程师变得极其强大，但产品经理仍受限于与客户沟通的带宽，因此理想比例可能是 1:1。</div>
+          <p><a href="https://x.com/thenanyu/status/2108976262698115550" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-15">
-          <p class="meta">10/10 05:31</p>
-          <h3>Nan Yu 的 X 更新</h3>
-          <div class="quote">Nan Yu 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。</div>
-          <p><a href="https://x.com/thenanyu/status/2108671762984731037" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 00:16</p>
+          <h3>Garry Tan 的 X 更新</h3>
+          <div class="quote">Garry Tan 分享工作流：使用 GStack /autoplan 让智能体解释计划，仍会审批计划，但很少需要干预；一个线程可协调合并请求队列、确保 CI 通过且只有全绿才进入主分支。</div>
+          <p><a href="https://x.com/garrytan/status/2108954741065879945" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-16">
-          <p class="meta">10/10 05:20</p>
-          <h3>Guillermo Rauch 的 X 更新</h3>
-          <div class="quote">Guillermo Rauch 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。</div>
-          <p><a href="https://x.com/rauchg/status/2108669027363295323" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 00:16</p>
+          <h3>Garry Tan 的 X 更新</h3>
+          <div class="quote">Garry Tan 表示使用 GStack /autoplan 并要求智能体用简单语言解释计划，仍会审批计划以确保方向正确，但很少需要干预，并称前沿模型现在非常出色。</div>
+          <p><a href="https://x.com/garrytan/status/2108954740013043789" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-17">
-          <p class="meta">10/10 04:05</p>
-          <h3>Thibault Sottiaux 的 X 更新</h3>
-          <div class="quote">Thibault Sottiaux 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/thsottiaux/status/2108650026671231468" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 00:16</p>
+          <h3>Garry Tan 的 X 更新</h3>
+          <div class="quote">Garry Tan 建议对检索和延迟类任务设置清晰的评测，围绕检索、延迟和每计算成本进行优化，并提到自己的仓库有 40 多个类别可自动研究和改进。</div>
+          <p><a href="https://x.com/garrytan/status/2108954738540863498" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-18">
-          <p class="meta">10/10 02:22</p>
-          <h3>Peter Yang 的 X 更新</h3>
-          <div class="quote">Peter Yang 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/petergyang/status/2108624122339287335" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/11 00:06</p>
+          <h3>Aaron Levie 的 X 更新</h3>
+          <div class="quote">Aaron Levie 认为随着智能体在企业中执行的任务远超人类，安全、治理、控制和审计将变得至关重要，需要像对待内部风险一样对待前沿闭源和开源权重模型。</div>
+          <p><a href="https://x.com/levie/status/2108952226714865966" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-19">
-          <p class="meta">10/10 02:09</p>
-          <h3>Nikunj Kothari 的 X 更新</h3>
-          <div class="quote">Nikunj Kothari 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/nikunj/status/2108620851130380610" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/10 23:52</p>
+          <h3>Nan Yu 的 X 更新</h3>
+          <div class="quote">Nan Yu 发帖称“没油了，加油问题”。</div>
+          <p><a href="https://x.com/thenanyu/status/2108948921007681902" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-20">
-          <p class="meta">10/10 01:59</p>
-          <h3>Madhu Guru 的 X 更新</h3>
-          <div class="quote">Madhu Guru 讨论了模型选择、成本或任务路由问题，重点是如何在质量、速度和价格之间做取舍。</div>
-          <p><a href="https://x.com/realmadhuguru/status/2108618266776387886" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <p class="meta">10/10 23:23</p>
+          <h3>Dan Shipper 的 X 更新</h3>
+          <div class="quote">Dan Shipper 认为如果公司 Slack 现在不是持续的惊奇与灵感来源，那就有问题。</div>
+          <p><a href="https://x.com/danshipper/status/2108941466785439796" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div>
 
         <div class="item" id="x-21">
-          <p class="meta">10/10 01:53</p>
-          <h3>Nikunj Kothari 的 X 更新</h3>
-          <div class="quote">Nikunj Kothari 更新了创业或团队建设相关内容，可能和 AI 创业生态的节奏、融资和组织判断有关。</div>
-          <p><a href="https://x.com/nikunj/status/2108616889605951834" target="_blank" rel="noopener noreferrer">原始链接</a></p>
-        </div>
-
-        <div class="item" id="x-22">
-          <p class="meta">10/10 00:35</p>
-          <h3>Amjad Masad 的 X 更新</h3>
-          <div class="quote">Amjad Masad 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/amasad/status/2108597112707686552" target="_blank" rel="noopener noreferrer">原始链接</a></p>
-        </div>
-
-        <div class="item" id="x-23">
-          <p class="meta">10/10 00:01</p>
+          <p class="meta">10/10 20:12</p>
           <h3>Dan Shipper 的 X 更新</h3>
-          <div class="quote">Dan Shipper 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。</div>
-          <p><a href="https://x.com/danshipper/status/2108588611000275009" target="_blank" rel="noopener noreferrer">原始链接</a></p>
-        </div>
-
-        <div class="item" id="x-24">
-          <p class="meta">10/09 23:43</p>
-          <h3>Zara Zhang 的 X 更新</h3>
-          <div class="quote">Zara Zhang 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/zarazhangrui/status/2108584212660129820" target="_blank" rel="noopener noreferrer">原始链接</a></p>
-        </div>
-
-        <div class="item" id="x-25">
-          <p class="meta">10/09 23:22</p>
-          <h3>Aditya Agarwal 的 X 更新</h3>
-          <div class="quote">Aditya Agarwal 有一条窗口内更新，原文信息较短，先作为补充动态保留。</div>
-          <p><a href="https://x.com/adityaag/status/2108578813751791926" target="_blank" rel="noopener noreferrer">原始链接</a></p>
-        </div>
-
-        <div class="item" id="x-26">
-          <p class="meta">10/09 22:20</p>
-          <h3>Swyx 的 X 更新</h3>
-          <div class="quote">Swyx 提到了智能体或编码工作流相关体验，适合放进开发工具和自动化产品线索里观察。</div>
-          <p><a href="https://x.com/swyx/status/2108563331376124389" target="_blank" rel="noopener noreferrer">原始链接</a></p>
-        </div>
-
-        <div class="item" id="x-27">
-          <p class="meta">10/09 22:12</p>
-          <h3>Matt Turck 的 X 更新</h3>
-          <div class="quote">Matt Turck 更新了创业或团队建设相关内容，可能和 AI 创业生态的节奏、融资和组织判断有关。</div>
-          <p><a href="https://x.com/mattturck/status/2108561284635480443" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+          <div class="quote">Dan Shipper 转发并评论一条有趣的研究探索。</div>
+          <p><a href="https://x.com/danshipper/status/2108893466998571442" target="_blank" rel="noopener noreferrer">原始链接</a></p>
         </div></div>
       <div class="source" id="podcasts"><span class="label">播客</span><p>本窗口暂无播客更新。</p></div>
       <div class="source" id="blogs"><span class="label">博客</span><p>本窗口暂无博客更新。</p></div>
@@ -288,10 +246,12 @@
       <h2>产品与观点线索</h2>
       <div class="block">
         <ul>
-          <li><strong>模型路由与成本效率：</strong>模型路由正在从工程细节变成应用层产品能力</li>
-<li><strong>智能体与开发工作流：</strong>智能体编码和开发工作流继续变得更上头，也更需要管理界面</li>
-<li><strong>创业、世界模型与生态关系：</strong>创业生态里既有世界模型的新公司故事，也有资本与价值观的摩擦</li>
-<li><strong>其他补充信息：</strong>还有一些更新更像补充信息，先保留但不强行解读</li>
+          <li>智能体集群被视为未来词元消耗的主要方向，企业级并行任务编排可能成为产品重点。</li>
+<li>智能体安全与治理（身份、权限、可观测性、审计）正从次要问题上升为核心能力。</li>
+<li>工程师与产品经理的协作比例可能因智能体而改变，1:1 被视为一种理想配置。</li>
+<li>评测与检索延迟优化被纳入日常开发流程，围绕检索、延迟和每计算成本的评测成为实践。</li>
+<li>代码作为创意表达媒介的观点，暗示开发工具与创作工具的边界正在模糊。</li>
+<li>风险投资中合同与信任问题被公开讨论，创始人被提醒重视独立法律意见。</li>
         </ul>
       </div>
     </section>
@@ -300,9 +260,12 @@
       <h2>可继续观察的问题</h2>
       <div class="block">
         <ul>
-          <li>今天出现的 agent 或工作流信号，是一次性动态，还是会连续几天被不同来源提到？</li>
-          <li>这些更新里提到的产品方向，是否对应明确用户场景，而不只是工具热度？</li>
-          <li>如果某个主题连续出现，是否值得单独整理成自己的信息源标签？</li>
+          <li>智能体集群在企业中的大规模部署会先出现在哪些行业，安全与治理方案如何落地？</li>
+<li>智能体安全能否跟上能力演进速度，身份、权限和审计标准会由谁制定？</li>
+<li>工程师与产品经理比例变化是否会成为组织设计的普遍趋势？</li>
+<li>围绕检索、延迟和成本的评测方法是否会形成通用工具链？</li>
+<li>模型服务重置与稳定性问题会如何影响 Pro 用户留存与付费意愿？</li>
+<li>风险投资合同争议是否会推动早期融资条款进一步标准化？</li>
         </ul>
       </div>
     </section>
