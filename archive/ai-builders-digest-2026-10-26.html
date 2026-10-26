@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everyday AI Newsletter｜2026-10-26</title>
+  <style>
+    :root { color-scheme: light; --bg:#f6f7f4; --paper:#fff; --ink:#1f2933; --muted:#667085; --line:#d9ded6; --accent:#1769aa; --soft:#eef4f7; --green:#2f6f4e; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { width: min(900px, calc(100% - 28px)); margin: 0 auto; padding: 30px 0 48px; }
+    header { padding: 10px 0 24px; border-bottom: 1px solid var(--line); }
+    h1 { margin: 8px 0 12px; font-size: clamp(30px, 6vw, 48px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 34px 0 12px; font-size: 23px; line-height: 1.3; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.35; letter-spacing: 0; }
+    p { margin: 0 0 13px; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .lede { max-width: 760px; font-size: 18px; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .toc a { display: inline-block; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font-size: 14px; text-decoration: none; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+    .metric, .block, .source { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+    .metric { display: block; padding: 13px 14px; color: var(--ink); text-decoration: none; }
+    .metric strong { display: block; font-size: 25px; line-height: 1.1; }
+    .block, .source { padding: 18px; margin-top: 14px; }
+    .label { display: inline-block; margin-bottom: 9px; color: var(--green); font-size: 13px; font-weight: 700; }
+    .item { padding-top: 13px; margin-top: 13px; border-top: 1px solid var(--line); }
+    .item:first-of-type { padding-top: 0; margin-top: 0; border-top: 0; }
+    .quote { padding: 12px 14px; margin: 10px 0 12px; border-left: 4px solid #9ab7c9; background: var(--soft); color: #273746; }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 8px 0; }
+    footer { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    @media (max-width: 680px) { main { width: min(100% - 24px, 900px); padding-top: 22px; } .grid { grid-template-columns: 1fr; } .block, .source { padding: 15px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="meta">本次实际执行：10/26 18:58，Asia/Shanghai；收录当前 feed 中此前未推送过、且不晚于该时点的信息。</p>
+      <h1>Everyday AI Newsletter｜2026-10-26</h1>
+      <p class="lede">本期信息密度不高，整体更像周末的碎片观察：X 上以产品细节、审美判断和创业心态的零散讨论为主，缺少成体系的产品发布或技术长文。可归纳的线索集中在两处：一是围绕 AI 产品体验与内容创作工作流的实操分享，二是对创业公司增长节奏与基础设施现实的冷静提醒。</p>
+      <nav class="toc" aria-label="日报目录">
+        <a href="#what-happened">今天发生了什么</a>
+        <a href="#source-overview">信息源更新概览</a>
+        <a href="#product-signals">产品与观点线索</a>
+        <a href="#watch-questions">可继续观察的问题</a>
+      </nav>
+      <div class="grid">
+        <a class="metric" href="#x-updates"><strong>14</strong><span class="meta">X 更新的信息</span></a>
+        <a class="metric" href="#podcasts"><strong>0</strong><span class="meta">播客</span></a>
+        <a class="metric" href="#blogs"><strong>0</strong><span class="meta">博客</span></a>
+      </div>
+    </header>
+
+    <section id="what-happened">
+      <h2>今天发生了什么</h2>
+      
+      <div class="block">
+        <span class="label">创业节奏与基础设施现实</span>
+        <h3>每天出现胜过一次性大发布，企业安全仍是难啃的硬骨头</h3>
+        <p>Zara Zhang 引用一段访谈观点：多数人高估了一次大型发布的重要性，低估了每天持续出现在时间线上的力量，建立每天做一条视频的系统，比花数万美元做一支发布视频更有效。Aaron Levie 则谈到大型企业安全的真实现状：风险面高度碎片化，库、工具、基础设施、数据和代码都在膨胀，很多企业连跟上都困难，数据分散导致无法实时判断风险状态，部分系统权限开得过宽，另一些则靠隐匿求安全。Matt Turck 用调侃口吻提到，风险投资机构把 2021 年在元宇宙、游戏和加密挖矿上的押注，包装成了“关键任务 AI 基础设施”。</p>
+        <p>为什么可能重要：三条内容共同勾勒出创业环境的两个侧面：增长靠持续输出而非单点爆发，而基础设施与安全这类“脏活”依然是企业客户的真实痛点。对创业者来说，前者是内容与获客策略的提醒，后者则暗示企业级工具仍有大量现代化改造的空间。</p>
+        <p class="meta">信息来源：<a href="#x-11">Aaron Levie</a>，<a href="#x-6">Matt Turck</a>，<a href="#x-14">Zara Zhang</a></p>
+      </div>
+    </section>
+
+    <section id="source-overview">
+      <h2>信息源更新概览</h2>
+      <div class="source" id="x-updates"><span class="label">X 更新的信息</span>
+        <div class="item" id="x-1">
+          <p class="meta">10/26 13:48</p>
+          <h3>Thibault Sottiaux 的 X 更新</h3>
+          <div class="quote">Thibault Sottiaux 提醒，网页版 ChatGPT 支持自定义外观，可以调得更柔和顺眼。</div>
+          <p><a href="https://x.com/thsottiaux/status/2114595002210783279" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-2">
+          <p class="meta">10/26 13:21</p>
+          <h3>Thibault Sottiaux 的 X 更新</h3>
+          <div class="quote">Thibault Sottiaux 发出“第 21 天”的计数式感慨，说今天是一次重置，并好奇剩下七天会发生什么。</div>
+          <p><a href="https://x.com/thsottiaux/status/2114588174249071102" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-3">
+          <p class="meta">10/26 11:33</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 称赞某个 AI 产出很漂亮，反问谁说 AI 没有品味。</div>
+          <p><a href="https://x.com/petergyang/status/2114560930646487116" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-4">
+          <p class="meta">10/26 11:17</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 发了一条生活化调侃，说自己就是这样，只不过零食还是妻子在买。</div>
+          <p><a href="https://x.com/petergyang/status/2114557067700916723" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-5">
+          <p class="meta">10/26 08:10</p>
+          <h3>Dan Shipper 的 X 更新</h3>
+          <div class="quote">Dan Shipper 只发了一条带链接的内容，没有附文字说明。</div>
+          <p><a href="https://x.com/danshipper/status/2114509827057561603" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-6">
+          <p class="meta">10/26 08:02</p>
+          <h3>Matt Turck 的 X 更新</h3>
+          <div class="quote">Matt Turck 调侃风险投资机构把 2021 年在元宇宙、游戏和加密挖矿上的押注，说成是“关键任务 AI 基础设施”。</div>
+          <p><a href="https://x.com/mattturck/status/2114507945585328606" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-7">
+          <p class="meta">10/26 08:00</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 分享用 Claude 在几分钟内复刻任意短视频风格的方法，提到 HyperFrames 工作室已将其做成原生能力：上传参考片段并用提示词描述改动，可换字体和配色，结构保持不变。</div>
+          <p><a href="https://x.com/petergyang/status/2114507378532229214" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-8">
+          <p class="meta">10/26 03:06</p>
+          <h3>Nan Yu 的 X 更新</h3>
+          <div class="quote">Nan Yu 吐槽未优化应用在支持分屏模式的设备上仍以默认形态呈现，觉得难以理解。</div>
+          <p><a href="https://x.com/thenanyu/status/2114433404557279435" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-9">
+          <p class="meta">10/26 02:44</p>
+          <h3>Nan Yu 的 X 更新</h3>
+          <div class="quote">Nan Yu 表示，等问题出现在数据或用户研究访谈里时已经太晚，损害已经造成、声誉已经受损。</div>
+          <p><a href="https://x.com/thenanyu/status/2114427877240488442" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-10">
+          <p class="meta">10/26 01:39</p>
+          <h3>Matt Turck 的 X 更新</h3>
+          <div class="quote">Matt Turck 发了一句“好社区”，配图分享。</div>
+          <p><a href="https://x.com/mattturck/status/2114411547594457483" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-11">
+          <p class="meta">10/26 00:18</p>
+          <h3>Aaron Levie 的 X 更新</h3>
+          <div class="quote">Aaron Levie 认同对大型企业安全现状的判断：风险面碎片化只会更复杂，库、工具、基础设施、数据和代码不断膨胀，多数企业难以跟上；数据高度分散导致无法实时掌握风险状态，部分系统权限过宽，另一些靠隐匿求安全，企业需要先做技术栈现代化。</div>
+          <p><a href="https://x.com/levie/status/2114391265655816315" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-12">
+          <p class="meta">10/25 23:36</p>
+          <h3>Nikunj Kothari 的 X 更新</h3>
+          <div class="quote">Nikunj Kothari 分享一张“黄金时刻”的照片。</div>
+          <p><a href="https://x.com/nikunj/status/2114380495140405394" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-13">
+          <p class="meta">10/25 15:49</p>
+          <h3>Swyx 的 X 更新</h3>
+          <div class="quote">Swyx 开玩笑说还差 12 个赞就能“压制”某人，问谁愿意帮忙。</div>
+          <p><a href="https://x.com/swyx/status/2114263159355904426" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-14">
+          <p class="meta">10/25 15:19</p>
+          <h3>Zara Zhang 的 X 更新</h3>
+          <div class="quote">Zara Zhang 推荐一段访谈，核心观点是多数人高估一次大型发布、低估每天持续出现的力量，建立每天做一条视频的系统比花数万美元做一支发布视频更有效。</div>
+          <p><a href="https://x.com/zarazhangrui/status/2114255477907570865" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div></div>
+      <div class="source" id="podcasts"><span class="label">播客</span><p>本窗口暂无播客更新。</p></div>
+      <div class="source" id="blogs"><span class="label">博客</span><p>本窗口暂无博客更新。</p></div>
+    </section>
+
+    <section id="product-signals">
+      <h2>产品与观点线索</h2>
+      <div class="block">
+        <ul>
+          <li>网页版 ChatGPT 的外观自定义，说明消费级 AI 产品开始重视界面个性化与使用舒适度。</li>
+<li>HyperFrames 把“参考片段＋提示词改风格”做成原生功能，是创作工具把复杂流程压缩为少数几步的典型做法。</li>
+<li>企业安全领域的碎片化与数据分散，被描述为普遍现状，意味着面向企业的数据治理与风险可视化仍有产品机会。</li>
+<li>“每天持续输出”被当作比单次大发布更有效的增长方式，对内容型产品与个人品牌运营有直接参考价值。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="watch-questions">
+      <h2>可继续观察的问题</h2>
+      <div class="block">
+        <ul>
+          <li>ChatGPT 的外观自定义会不会扩展到更多端和更细的个性化设置？</li>
+<li>风格复刻类能力在版权与原创性上会如何被约束，平台会不会出台相应规则？</li>
+<li>企业安全与数据治理的碎片化问题，会不会催生新的整合型工具或智能体产品？</li>
+<li>持续日更的内容策略在 AI 生成内容泛滥后，效果还能维持多久？</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p>Generated through the Follow Builders skill: https://github.com/zarazhangrui/follow-builders</p>
+    </footer>
+  </main>
+</body>
+</html>
