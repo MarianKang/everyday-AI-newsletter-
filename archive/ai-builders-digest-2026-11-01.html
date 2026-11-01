@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everyday AI Newsletter｜2026-11-01</title>
+  <style>
+    :root { color-scheme: light; --bg:#f6f7f4; --paper:#fff; --ink:#1f2933; --muted:#667085; --line:#d9ded6; --accent:#1769aa; --soft:#eef4f7; --green:#2f6f4e; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.72 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { width: min(900px, calc(100% - 28px)); margin: 0 auto; padding: 30px 0 48px; }
+    header { padding: 10px 0 24px; border-bottom: 1px solid var(--line); }
+    h1 { margin: 8px 0 12px; font-size: clamp(30px, 6vw, 48px); line-height: 1.08; letter-spacing: 0; }
+    h2 { margin: 34px 0 12px; font-size: 23px; line-height: 1.3; letter-spacing: 0; }
+    h3 { margin: 0 0 8px; font-size: 18px; line-height: 1.35; letter-spacing: 0; }
+    p { margin: 0 0 13px; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    .meta { color: var(--muted); font-size: 14px; }
+    .lede { max-width: 760px; font-size: 18px; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .toc a { display: inline-block; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font-size: 14px; text-decoration: none; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
+    .metric, .block, .source { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; }
+    .metric { display: block; padding: 13px 14px; color: var(--ink); text-decoration: none; }
+    .metric strong { display: block; font-size: 25px; line-height: 1.1; }
+    .block, .source { padding: 18px; margin-top: 14px; }
+    .label { display: inline-block; margin-bottom: 9px; color: var(--green); font-size: 13px; font-weight: 700; }
+    .item { padding-top: 13px; margin-top: 13px; border-top: 1px solid var(--line); }
+    .item:first-of-type { padding-top: 0; margin-top: 0; border-top: 0; }
+    .quote { padding: 12px 14px; margin: 10px 0 12px; border-left: 4px solid #9ab7c9; background: var(--soft); color: #273746; }
+    ul { margin: 8px 0 0; padding-left: 22px; }
+    li { margin: 8px 0; }
+    footer { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+    @media (max-width: 680px) { main { width: min(100% - 24px, 900px); padding-top: 22px; } .grid { grid-template-columns: 1fr; } .block, .source { padding: 15px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="meta">本次实际执行：11/01 19:46，Asia/Shanghai；收录当前 feed 中此前未推送过、且不晚于该时点的信息。</p>
+      <h1>Everyday AI Newsletter｜2026-11-01</h1>
+      <p class="lede">本期整体呈现出一个明显转向：AI 产品与创业讨论正从“用 AI 提速”过渡到“用 AI 做出原本做不到的事”，同时一线实践者开始把注意力放在低努力、可迭代的工作流上，而非一味追求最大算力或最高配置。X 上的讨论集中在工作方式与产品标准的变化，播客则提供了一个 AI 原生金融服务公司的具体案例，展示智能体如何主动驱动业务流程。</p>
+      <nav class="toc" aria-label="日报目录">
+        <a href="#what-happened">今天发生了什么</a>
+        <a href="#source-overview">信息源更新概览</a>
+        <a href="#product-signals">产品与观点线索</a>
+        <a href="#watch-questions">可继续观察的问题</a>
+      </nav>
+      <div class="grid">
+        <a class="metric" href="#x-updates"><strong>13</strong><span class="meta">X 更新的信息</span></a>
+        <a class="metric" href="#podcasts"><strong>1</strong><span class="meta">播客</span></a>
+        <a class="metric" href="#blogs"><strong>0</strong><span class="meta">博客</span></a>
+      </div>
+    </header>
+
+    <section id="what-happened">
+      <h2>今天发生了什么</h2>
+      
+      <div class="block">
+        <span class="label">AI 工作方式与产品标准</span>
+        <h3>从“更快完成旧任务”转向“做出原本做不到的结果”</h3>
+        <p>Aaron Levie 提出一个判断是否充分利用 AI 的试金石：六个月前 AI 最多帮你把已有产出做得快一点，而现在产品原型不仅应完整可用，还应有明显更好的功能；工程架构应带来原本无法追求的性 能提升；研究应覆盖所有事实维度；业务流程应完全由 AI 运营。Swyx 则从另一个角度补充，认为在吞吐量受限时，低努力加批评循环比追求超高配置更有效，并提到 Karpathy 在新项目中使用中等努力档位。两条内容共同指向一个变化：AI 工作方式正在从“堆资源”转向“选对努力档位并建立反馈循环”，产品标准也随之提高。</p>
+        <p>为什么可能重要：这组讨论直接关系到产品与创业团队如何设定 AI 使用标准：如果仍以“提速”为目标，可能低估了 AI 能带来的差异化；而如果盲目追求最高配置，又可能牺牲吞吐量。Levie 和 Swyx 的观点提供了两种互补的校准思路。</p>
+        <p class="meta">信息来源：<a href="#x-8">Aaron Levie</a>，<a href="#x-9">Swyx</a>，<a href="#x-1">Swyx</a></p>
+      </div>
+
+      <div class="block">
+        <span class="label">AI 原生金融服务</span>
+        <h3>智能体主动提示人，24 小时运行的服务模式</h3>
+        <p>Latent Space 播客对话 Arca 的 Aman Singh，介绍这家 AI 原生财富管理公司如何用智能体运行金融服务。Arca 融资 6400 万美元，服务涵盖财务建议、税务规划、保险与遗产规划等。Aman 强调 Arca 不是 SaaS 公司，而是公司本身，智能体提示人的频率高于人提示智能体，服务是主动式、全天候运行的。</p>
+        <p>为什么可能重要：这是智能体从工具走向“主动服务”的一个具体案例：智能体不再只是等人下指令，而是持续运行并主动推动人。对做垂直智能体产品的创业者来说，Arca 的定位和交互模式值得参考。</p>
+        <p class="meta">信息来源：<a href="#podcast-1">Latent Space</a></p>
+      </div>
+    </section>
+
+    <section id="source-overview">
+      <h2>信息源更新概览</h2>
+      <div class="source" id="x-updates"><span class="label">X 更新的信息</span>
+        <div class="item" id="x-1">
+          <p class="meta">11/01 14:03</p>
+          <h3>Swyx 的 X 更新</h3>
+          <div class="quote">Swyx 提到 Karpathy 在新项目 Hackertube 中使用中等努力档位，认为对努力档位的强烈偏好就像“制表符对空格”的争论，按个人口味调整即可。</div>
+          <p><a href="https://x.com/swyx/status/2116773135668404286" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-2">
+          <p class="meta">11/01 12:48</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 发问：更喜欢听这个而不是 Spotify，是不是很奇怪。</div>
+          <p><a href="https://x.com/petergyang/status/2116754343315841471" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-3">
+          <p class="meta">11/01 11:24</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 表示不太在意“不给糖就捣蛋”的部分，能随便装扮成任何想要的样子才是最好的。</div>
+          <p><a href="https://x.com/petergyang/status/2116733034926100841" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-4">
+          <p class="meta">11/01 11:23</p>
+          <h3>Peter Yang 的 X 更新</h3>
+          <div class="quote">Peter Yang 认为万圣节是最好的节日，应该每季度过一次。</div>
+          <p><a href="https://x.com/petergyang/status/2116732887265656978" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-5">
+          <p class="meta">11/01 09:55</p>
+          <h3>Guillermo Rauch 的 X 更新</h3>
+          <div class="quote">Guillermo Rauch 转发内容并评论：这在旧金山会非常带感。</div>
+          <p><a href="https://x.com/rauchg/status/2116710688550994042" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-6">
+          <p class="meta">11/01 08:43</p>
+          <h3>Thibault Sottiaux 的 X 更新</h3>
+          <div class="quote">Thibault Sottiaux 简短发文：“Banked 1/2”。</div>
+          <p><a href="https://x.com/thsottiaux/status/2116692529970311254" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-7">
+          <p class="meta">11/01 06:06</p>
+          <h3>Matt Turck 的 X 更新</h3>
+          <div class="quote">Matt Turck 发布万圣节主题内容，称其为永不过时的经典。</div>
+          <p><a href="https://x.com/mattturck/status/2116653171741470990" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-8">
+          <p class="meta">11/01 06:02</p>
+          <h3>Aaron Levie 的 X 更新</h3>
+          <div class="quote">Aaron Levie 提出判断 AI 使用是否充分的试金石：现在用 AI 的产出应大幅超过以往，产品原型应功能完整且更好，工程架构应带来原本无法追求的性 能提升，研究应覆盖所有事实维度，业务流程应完全由 AI 运营。</div>
+          <p><a href="https://x.com/levie/status/2116652002830963114" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-9">
+          <p class="meta">11/01 05:24</p>
+          <h3>Swyx 的 X 更新</h3>
+          <div class="quote">Swyx 主张在吞吐量受限时选择低努力加批评循环，而非追求最高配置，并提到自己的技能仓库中的“babysit-runs”。</div>
+          <p><a href="https://x.com/swyx/status/2116642586387730593" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-10">
+          <p class="meta">11/01 05:16</p>
+          <h3>Garry Tan 的 X 更新</h3>
+          <div class="quote">Garry Tan 引用一段关于坏政治下最差者为何上升的论述，讨论系统如何筛选无底线者并以共同敌人动员多数。</div>
+          <p><a href="https://x.com/garrytan/status/2116640529232609515" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-11">
+          <p class="meta">11/01 04:12</p>
+          <h3>Nikunj Kothari 的 X 更新</h3>
+          <div class="quote">Nikunj Kothari 分享初雪照片，称初雪总是特别。</div>
+          <p><a href="https://x.com/nikunj/status/2116624458198982668" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-12">
+          <p class="meta">10/31 23:36</p>
+          <h3>Nikunj Kothari 的 X 更新</h3>
+          <div class="quote">Nikunj Kothari 调侃有人在万圣节装扮成“网络安全意识月”，并说讨厌旧金山。</div>
+          <p><a href="https://x.com/nikunj/status/2116554844207198501" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div>
+
+        <div class="item" id="x-13">
+          <p class="meta">10/31 22:53</p>
+          <h3>Swyx 的 X 更新</h3>
+          <div class="quote">Swyx 发布一条直接剪辑链接。</div>
+          <p><a href="https://x.com/swyx/status/2116544052267205093" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div></div>
+      <div class="source" id="podcasts"><span class="label">播客</span>
+        <div class="item" id="podcast-1">
+          <p class="meta">11/01 00:00</p>
+          <h3>Latent Space - Using Agents for Long-Horizon Financial Work — Aman Singh, Arca</h3>
+          <div class="quote">Latent Space 播客对话 Arca 的 Aman Singh，介绍这家 AI 原生财富管理公司如何用智能体运行金融服务，强调智能体主动提示人、服务 24 小时运行，公司本身而非 SaaS 产品。</div>
+          <p><a href="https://www.youtube.com/@LatentSpacePod" target="_blank" rel="noopener noreferrer">原始链接</a></p>
+        </div></div>
+      <div class="source" id="blogs"><span class="label">博客</span><p>本窗口暂无博客更新。</p></div>
+    </section>
+
+    <section id="product-signals">
+      <h2>产品与观点线索</h2>
+      <div class="block">
+        <ul>
+          <li>Aaron Levie 提出的试金石可作为产品团队评估 AI 使用深度的内部标准：原型是否超出原有功能、架构是否带来新性能、研究是否覆盖全维度、流程是否完全由 AI 运营。</li>
+<li>Swyx 的“低努力加批评循环”提示产品团队在智能体工作流中优先设计反馈与迭代机制，而非一味追求最大算力或最高配置。</li>
+<li>Arca 的案例显示，AI 原生服务产品可以不做 SaaS，而是直接以公司形态提供服务，智能体主动推动人而非等人下指令，这对垂直智能体产品的交互设计有参考价值。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="watch-questions">
+      <h2>可继续观察的问题</h2>
+      <div class="block">
+        <ul>
+          <li>Levie 提出的 AI 产出标准是否会在创业公司中形成新的产品评审共识？</li>
+<li>低努力加批评循环的工作流是否会成为智能体产品设计的默认模式？</li>
+<li>AI 原生金融服务公司以“公司本身”而非 SaaS 形态运行，这种模式在合规与规模化上会遇到哪些挑战？</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>
+      <p>Generated through the Follow Builders skill: https://github.com/zarazhangrui/follow-builders</p>
+    </footer>
+  </main>
+</body>
+</html>
